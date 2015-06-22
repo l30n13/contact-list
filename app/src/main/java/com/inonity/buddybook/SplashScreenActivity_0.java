@@ -18,12 +18,11 @@ public class SplashScreenActivity_0 extends Activity {
 
             @Override
             public void run() {
-                Intent splashIntent = new Intent(SplashScreenActivity_0.this,ContactListActivity.class);
+                Intent splashIntent = new Intent(SplashScreenActivity_0.this, ContactListActivity.class);
                 SplashScreenActivity_0.this.startActivity(splashIntent);
                 SplashScreenActivity_0.this.finish();
             }
         }, SPLASH_DISPLAY_LENGTH);
     }
 
-
-    }
+}
