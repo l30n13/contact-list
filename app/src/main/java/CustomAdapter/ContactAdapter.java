@@ -18,55 +18,53 @@ import HelperClasses.ContactHelper;
 
 public class ContactAdapter extends ArrayAdapter<ContactHelper> {
 
-	private Activity activity;
-	private List<ContactHelper> items;
-	private int row;
-	private ContactHelper objBean;
+    private Activity activity;
+    private List<ContactHelper> items;
+    private int row;
+    private ContactHelper objBean;
 
-	public ContactAdapter(Activity act, int row, List<ContactHelper> items) {
-		super(act, row, items);
+    public ContactAdapter(Activity act, int row, List<ContactHelper> items) {
+        super(act, row, items);
 
-		this.activity = act;
-		this.row = row;
-		this.items = items;
+        this.activity = act;
+        this.row = row;
+        this.items = items;
 
-	}
+    }
 
-	@Override
-	public View getView(final int position, View convertView, ViewGroup parent) {
-		View view = convertView;
-		ViewHolder holder;
-		if (view == null) {
-			LayoutInflater inflater = (LayoutInflater) activity
-					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			view = inflater.inflate(row, null);
+    @Override
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        View view = convertView;
+        ViewHolder holder;
+        if (view == null) {
+            LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            view = inflater.inflate(row, null);
 
-			holder = new ViewHolder();
-			view.setTag(holder);
-		} else {
-			holder = (ViewHolder) view.getTag();
-		}
+            holder = new ViewHolder();
+            view.setTag(holder);
+        } else {
+            holder = (ViewHolder) view.getTag();
+        }
 
-		if ((items == null) || ((position + 1) > items.size()))
-			return view;
+        if ((items == null) || ((position + 1) > items.size()))
+            return view;
 
-		objBean = items.get(position);
+        objBean = items.get(position);
 
-		holder.tvname = (TextView) view.findViewById(R.id.textViewContactName);
-		//holder.tvPhoneNo = (TextView) view.findViewById(R.id.tvphone);
-		holder.ivpic = (ImageView)view.findViewById(R.id.imageViewContactImage);
+        holder.tvname = (TextView) view.findViewById(R.id.textViewContactName);
+        //holder.tvPhoneNo = (TextView) view.findViewById(R.id.tvphone);
+        holder.ivpic = (ImageView) view.findViewById(R.id.imageViewContactImage);
 
-		if (holder.tvname != null && null != objBean.getName()
-				&& objBean.getName().trim().length() > 0) {
-			holder.tvname.setText(Html.fromHtml(objBean.getName()));
-		}
+        if (holder.tvname != null && null != objBean.getName() && objBean.getName().trim().length() > 0) {
+            holder.tvname.setText(Html.fromHtml(objBean.getName()));
+        }
 
-		return view;
-	}
+        return view;
+    }
 
-	public class ViewHolder {
-		public TextView tvname;
-		public ImageView ivpic;
-	}
+    public class ViewHolder {
+        public TextView tvname;
+        public ImageView ivpic;
+    }
 
 }
