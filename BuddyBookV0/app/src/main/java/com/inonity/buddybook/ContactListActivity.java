@@ -19,19 +19,29 @@ import java.util.Comparator;
 import java.util.List;
 
 import CustomAdapter.ContactAdapter;
+import Database.DatabaseHelper;
 import HelperClasses.ContactHelper;
 
 public class ContactListActivity extends Activity implements
         AdapterView.OnItemClickListener {
 
+    private DatabaseHelper db;
     private ListView listView;
-    private List<ContactHelper> list = new ArrayList<ContactHelper>();
+    private ArrayList<ContactHelper> list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_content_list);
 
+
+        GetDataFromPhone();
+    }
+
+    //retrive data from phone
+    private void GetDataFromPhone() {
+        db = new DatabaseHelper(this);
+        long inserted = 0;
         listView = (ListView) findViewById(R.id.listViewContacts);
         listView.setOnItemClickListener(this);
 
@@ -50,15 +60,27 @@ public class ContactListActivity extends Activity implements
 
             ContactHelper objContact = new ContactHelper();
             objContact.setName(name);
-            objContact.setPhoneNo(phoneNumber);
-            list.add(objContact);
+            objContact.setPhone(phoneNumber);
+            // list.add(objContact);
+            inserted = 0;
+            try {
+                inserted = db.addDetail(objContact);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
 
         }
+
+        list = (ArrayList<ContactHelper>) db.getAllData();
+        print(list);
+
+        if (inserted >= 0)
+            Toast.makeText(getApplicationContext(), "inserted", Toast.LENGTH_LONG).show();
+        else
+            Toast.makeText(getApplicationContext(), "failed", Toast.LENGTH_LONG).show();
         phones.close();
 
-        ContactAdapter objAdapter = new ContactAdapter(
-                ContactListActivity.this, R.layout.custom_layout_name_pic_display, list);
-        listView.setAdapter(objAdapter);
 
         if (null != list && list.size() != 0) {
             Collections.sort(list, new Comparator<ContactHelper>() {
@@ -95,8 +117,8 @@ public class ContactListActivity extends Activity implements
     @Override
     public void onItemClick(AdapterView<?> listview, View v, int position,
                             long id) {
-        ContactHelper bean = (ContactHelper) listview.getItemAtPosition(position);
-        showCallDialog(bean.getName(), bean.getPhoneNo());
+        ContactHelper contactHelper = (ContactHelper) listview.getItemAtPosition(position);
+        showCallDialog(contactHelper.getName(), contactHelper.getPhone());
     }
 
     private void showCallDialog(String name, final String phoneNo) {
@@ -124,5 +146,12 @@ public class ContactListActivity extends Activity implements
             }
         });
         alert.show();
+    }
+
+    private void print(List<ContactHelper> list) {
+        ContactAdapter objAdapter = new ContactAdapter(
+                ContactListActivity.this, R.layout.custom_layout_name_pic_display, list);
+        listView.setAdapter(objAdapter);
+
     }
 }

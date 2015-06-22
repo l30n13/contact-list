@@ -60,11 +60,7 @@ public class ContactAdapter extends ArrayAdapter<ContactHelper> {
 				&& objBean.getName().trim().length() > 0) {
 			holder.tvname.setText(Html.fromHtml(objBean.getName()));
 		}
-/*		if (holder.tvPhoneNo != null && null != objBean.getPhoneNo()
-				&& objBean.getPhoneNo().trim().length() > 0) {
-			holder.tvPhoneNo.setText(Html.fromHtml(objBean.getPhoneNo()));
-		}
-		*/
+
 		return view;
 	}
 
