@@ -90,8 +90,7 @@ public class ContactListActivity extends Activity implements
                     return lhs.getName().compareTo(rhs.getName());
                 }
             });
-            AlertDialog alert = new AlertDialog.Builder(
-                    ContactListActivity.this).create();
+            AlertDialog alert = new AlertDialog.Builder(ContactListActivity.this).create();
             alert.setTitle("");
 
             alert.setMessage(list.size() + " Contact Found!!!");
@@ -115,15 +114,13 @@ public class ContactListActivity extends Activity implements
     }
 
     @Override
-    public void onItemClick(AdapterView<?> listview, View v, int position,
-                            long id) {
+    public void onItemClick(AdapterView<?> listview, View v, int position, long id) {
         ContactHelper contactHelper = (ContactHelper) listview.getItemAtPosition(position);
         showCallDialog(contactHelper.getName(), contactHelper.getPhone());
     }
 
     private void showCallDialog(String name, final String phoneNo) {
-        AlertDialog alert = new AlertDialog.Builder(ContactListActivity.this)
-                .create();
+        AlertDialog alert = new AlertDialog.Builder(ContactListActivity.this).create();
         alert.setTitle("Call?");
 
         alert.setMessage("Are you sure want to call " + name + " ?");
@@ -140,8 +137,7 @@ public class ContactListActivity extends Activity implements
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String phoneNumber = "tel:" + phoneNo;
-                Intent intent = new Intent(Intent.ACTION_CALL, Uri
-                        .parse(phoneNumber));
+                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse(phoneNumber));
                 startActivity(intent);
             }
         });
