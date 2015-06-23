@@ -22,32 +22,37 @@ import CustomAdapter.ContactAdapter;
 import Database.DatabaseHelper;
 import HelperClasses.ContactHelper;
 
-public class ContactListActivity extends Activity implements
-        AdapterView.OnItemClickListener {
+public class ContactListActivity extends Activity implements AdapterView.OnItemClickListener {
 
     private DatabaseHelper db;
     private ListView listView;
     private ArrayList<ContactHelper> list = new ArrayList<>();
+    private ContactHelper objContact;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_content_list);
 
-
-        GetDataFromPhone();
+        //Checking if the database is empty
+        db = new DatabaseHelper(this);
+        if (db.isEmpty()) {
+            showDataFromDatabase();
+            Toast.makeText(this, "DataBase not empty", Toast.LENGTH_SHORT).show();
+        } else {
+            getDataFromPhone();
+            showDataFromDatabase();
+        }
     }
 
-    //retrive data from phone
-    private void GetDataFromPhone() {
-        db = new DatabaseHelper(this);
-        long inserted = 0;
-        listView = (ListView) findViewById(R.id.listViewContacts);
-        listView.setOnItemClickListener(this);
 
-        Cursor phones = getContentResolver().query(
-                ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null,
-                null, null);
+    /**
+     * retrieve data from phone
+     */
+    private void getDataFromPhone() {
+        db = new DatabaseHelper(this);
+
+        Cursor phones = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null);
         while (phones.moveToNext()) {
 
             String name = phones
@@ -58,28 +63,34 @@ public class ContactListActivity extends Activity implements
                     .getString(phones
                             .getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
 
-            ContactHelper objContact = new ContactHelper();
+            objContact = new ContactHelper();
             objContact.setName(name);
             objContact.setPhone(phoneNumber);
             // list.add(objContact);
-            inserted = 0;
+
+            long inserted = 0;
             try {
                 inserted = db.addDetail(objContact);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-
+            /*if (inserted >= 0)
+                Toast.makeText(getApplicationContext(), "inserted", Toast.LENGTH_LONG).show();
+            else
+                Toast.makeText(getApplicationContext(), "failed", Toast.LENGTH_LONG).show();*/
         }
 
+        phones.close();
+    }
+
+    /**
+     * Retrieve saved data from database
+     */
+    private void showDataFromDatabase() {
+        listView = (ListView) findViewById(R.id.listViewContacts);
+        listView.setOnItemClickListener(this);
         list = (ArrayList<ContactHelper>) db.getAllData();
         print(list);
-
-        if (inserted >= 0)
-            Toast.makeText(getApplicationContext(), "inserted", Toast.LENGTH_LONG).show();
-        else
-            Toast.makeText(getApplicationContext(), "failed", Toast.LENGTH_LONG).show();
-        phones.close();
 
 
         if (null != list && list.size() != 0) {
@@ -145,9 +156,7 @@ public class ContactListActivity extends Activity implements
     }
 
     private void print(List<ContactHelper> list) {
-        ContactAdapter objAdapter = new ContactAdapter(
-                ContactListActivity.this, R.layout.custom_layout_name_pic_display, list);
+        ContactAdapter objAdapter = new ContactAdapter(ContactListActivity.this, R.layout.custom_layout_name_pic_display, list);
         listView.setAdapter(objAdapter);
-
     }
 }
