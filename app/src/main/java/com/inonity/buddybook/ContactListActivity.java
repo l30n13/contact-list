@@ -156,7 +156,7 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
     }
 
     private void print(List<ContactHelper> list) {
-        ContactAdapter objAdapter = new ContactAdapter(ContactListActivity.this, R.layout.custom_layout_name_pic_display, list);
+        ContactAdapter objAdapter = new ContactAdapter(this, 0, list);
         listView.setAdapter(objAdapter);
     }
 }
