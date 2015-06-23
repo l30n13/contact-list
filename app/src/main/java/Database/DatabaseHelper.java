@@ -62,7 +62,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(INFORMATION_TABLE);
-        db.close();
     }
 
     @Override
@@ -73,7 +72,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public long addDetail(ContactHelper info) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(NAME, info.getName());
@@ -115,5 +114,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return dataArrayList;
     }
 
+    /**
+     * Checks if the database is empty
+     *
+     * @return true or false
+     */
+    public boolean isEmpty() {
+        String query = "SELECT " + _ID + " FROM " + TABLE_NAME + ";";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        int columnCount = c.getCount();
+        if (columnCount >= 1) {
+            db.close();
+            return true;
+        } else {
+            db.close();
+            return false;
+        }
+    }
 
 }
