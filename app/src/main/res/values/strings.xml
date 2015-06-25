@@ -15,4 +15,5 @@
     <string name="action_example">Example action</string>
     <string name="title_activity_using_tab_library">UsingTabLibraryActivity</string>
     <string name="title_activity_content_list">ContentListActivity</string>
+    <string name="title_activity_view_details">Details</string>
 </resources>
