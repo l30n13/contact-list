@@ -1,9 +1,7 @@
 package com.inonity.buddybook;
 
-import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -11,10 +9,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import CustomAdapter.ContactAdapter;
-import HelperClasses.ContactHelper;
+import CustomAdapter.PhoneAdapter;
 
 public class ViewDetailsActivity extends ActionBarActivity {
 
@@ -27,9 +23,10 @@ public class ViewDetailsActivity extends ActionBarActivity {
         TextView name = (TextView) findViewById(R.id.name);
 
         String[] details = getIntent().getExtras().getStringArray("Details");
+        name.setText(details[0]);
 
         String[] phone = {details[1]};
-        name.setText(details[0]);
+
 
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, phone);
         phoneNoList.setAdapter(arrayAdapter);

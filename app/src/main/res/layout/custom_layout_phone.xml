@@ -11,16 +11,17 @@
         android:weightSum="5">
 
         <EditText
+            android:id="@+id/phoneNo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
             android:layout_weight="3"
             android:ems="10"
-            android:id="@+id/phoneNo"
             android:focusable="false"
             android:inputType="none" />
 
         <ImageButton
+            android:id="@+id/normalCall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -28,6 +29,7 @@
             android:src="@drawable/abc_btn_radio_to_on_mtrl_015" />
 
         <ImageButton
+            android:id="@+id/videoCall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
