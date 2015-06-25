@@ -126,8 +126,8 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
 
     @Override
     public void onItemClick(AdapterView<?> listview, View v, int position, long id) {
-        ContactHelper contactHelper = (ContactHelper) listview.getItemAtPosition(position);
-        showCallDialog(contactHelper.getName(), contactHelper.getPhone());
+        //ContactHelper contactHelper = (ContactHelper) listview.getItemAtPosition(position);
+        showCallDialog(list.get(position).getName(), list.get(position).getPhone());
     }
 
     private void showCallDialog(String name, final String phoneNo) {
