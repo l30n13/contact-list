@@ -21,10 +21,13 @@
         </activity>
         <activity
             android:name=".HomeViewActivity_1"
-            android:label="@string/title_activity_home_view_activity_1"></activity>
+            android:label="@string/title_activity_home_view_activity_1" />
         <activity
             android:name=".ContactListActivity"
-            android:label="@string/title_activity_content_list"></activity>
+            android:label="@string/title_activity_content_list" />
+        <activity
+            android:name=".ViewDetailsActivity"
+            android:label="@string/title_activity_view_details"></activity>
     </application>
 
 </manifest>

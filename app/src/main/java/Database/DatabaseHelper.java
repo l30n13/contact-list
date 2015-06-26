@@ -97,7 +97,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public List<ContactHelper> getAllData() {
         List<ContactHelper> dataArrayList = new ArrayList<ContactHelper>();
-        String selectQuery = "SELECT " + _ID + ", " + NAME + " FROM " + TABLE_NAME;
+        String selectQuery = "SELECT " + _ID + ", " + NAME + "," + PHONE + " FROM " + TABLE_NAME;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(selectQuery, null);
         if (c.moveToFirst()) {
@@ -105,6 +105,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 ContactHelper info = new ContactHelper();
                 info.setId(c.getInt(c.getColumnIndex(_ID)));
                 info.setName(c.getString(c.getColumnIndex(NAME)));
+                info.setPhone(c.getString(c.getColumnIndex(PHONE)));
 
                 dataArrayList.add(info);
             } while (c.moveToNext());

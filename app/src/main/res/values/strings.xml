@@ -18,7 +18,11 @@
     <string name="action_example">Example action</string>
     <string name="title_activity_using_tab_library">UsingTabLibraryActivity</string>
     <string name="title_activity_content_list">ContentListActivity</string>
+<<<<<<< HEAD
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+=======
+    <string name="title_activity_view_details">Details</string>
+>>>>>>> a049033d6e48c240e9cc744a9b0f432583121a7e
 </resources>

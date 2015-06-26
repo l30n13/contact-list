@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -38,7 +39,7 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
         db = new DatabaseHelper(this);
         if (db.isEmpty()) {
             showDataFromDatabase();
-            Toast.makeText(this, "DataBase not empty", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "DataBase not empty", Toast.LENGTH_SHORT).show();
         } else {
             getDataFromPhone();
             showDataFromDatabase();
@@ -74,10 +75,6 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            /*if (inserted >= 0)
-                Toast.makeText(getApplicationContext(), "inserted", Toast.LENGTH_LONG).show();
-            else
-                Toast.makeText(getApplicationContext(), "failed", Toast.LENGTH_LONG).show();*/
         }
 
         phones.close();
@@ -126,8 +123,18 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
 
     @Override
     public void onItemClick(AdapterView<?> listview, View v, int position, long id) {
-        ContactHelper contactHelper = (ContactHelper) listview.getItemAtPosition(position);
-        showCallDialog(contactHelper.getName(), contactHelper.getPhone());
+        //ContactHelper contactHelper = (ContactHelper) listview.getItemAtPosition(position);
+
+        Intent i = new Intent(this, ViewDetailsActivity.class);
+
+        Log.i("TEST", list.get(position).getName());
+
+        String[] details = {list.get(position).getName(), list.get(position).getPhone()};
+
+        i.putExtra("Details", details);
+        startActivity(i);
+
+        //showCallDialog(list.get(position).getName(), list.get(position).getPhone());
     }
 
     private void showCallDialog(String name, final String phoneNo) {
