@@ -20,11 +20,11 @@ import HelperClasses.ContactHelper;
 /**
  * Created by tonmoy on 6/25/15.
  */
-public class PhoneAdapter extends ArrayAdapter<String[]> {
+public class PhoneAdapter extends ArrayAdapter<String> {
     private final Context context;
-    private ArrayList<String[]> items;
+    private ArrayList<String> items;
 
-    public PhoneAdapter(Context context, int resource, ArrayList<String[]> items) {
+    public PhoneAdapter(Context context, int resource, ArrayList<String> items) {
         super(context, resource, items);
         this.context = context;
         this.items = items;
@@ -34,7 +34,7 @@ public class PhoneAdapter extends ArrayAdapter<String[]> {
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View view = inflater.inflate(R.layout.custom_layout_name_pic_display, parent, false);
+        View view = inflater.inflate(R.layout.custom_layout_details_phone_number, parent, false);
 
         EditText phoneNo = (EditText) view.findViewById(R.id.phoneNo);
         /*ImageButton normalCall = (ImageButton) view.findViewById(R.id.normalCall);
