@@ -55,7 +55,9 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
     private void getDataFromPhone() {
         db = new DatabaseHelper(this);
 
-        Cursor phones = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null);
+        String sortName = ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " ASC";
+
+        Cursor phones = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, sortName);
         phones.moveToFirst();
 
         ArrayList<String> phoneNo = new ArrayList<>();
@@ -76,20 +78,15 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
                 objContact.setName(name);
                 phoneNo.add(phoneNumber);
 
-            } else if (duplicateName == name) {
-
+            } else if (duplicateName.equals(name)) {
                 phoneNo.add(phoneNumber);
-
             } else {
-
                 objContact.setPhone(phoneNo);
                 phoneNo.clear();
                 duplicateName = null;
                 db.addDetail(objContact);
                 Log.i("Name and phone", name + " " + phoneNo.toString());
-                for(String a:phoneNo)
-                    System.out.println(a);
-                phones.moveToPrevious();
+                //phones.moveToPrevious();
             }
             phones.moveToNext();
 
@@ -133,7 +130,6 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
         } else {
             showToast("No Contact Found!!!");
         }
-        print(list);
     }
 
     private void showToast(String msg) {
