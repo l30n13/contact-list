@@ -29,6 +29,8 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
     private ListView listView;
     private ArrayList<ContactHelper> list = new ArrayList<>();
     private ContactHelper objContact;
+    String duplicateName;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,27 +56,55 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
         db = new DatabaseHelper(this);
 
         Cursor phones = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null);
-        while (phones.moveToNext()) {
+        phones.moveToFirst();
+
+        ArrayList<String> phoneNo = new ArrayList<>();
+        duplicateName = null;
+        for (int i = 0; i < phones.getCount(); i++) {
+
+            //while (phones.moveToNext()) {
 
             String name = phones
                     .getString(phones
                             .getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
-
             String phoneNumber = phones
                     .getString(phones
                             .getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
 
-            objContact = new ContactHelper();
-            objContact.setName(name);
-            objContact.setPhone(phoneNumber);
-            // list.add(objContact);
+            if (duplicateName == null) {
+                duplicateName = name;
 
-            long inserted = 0;
-            try {
-                inserted = db.addDetail(objContact);
-            } catch (Exception e) {
-                e.printStackTrace();
+                objContact = new ContactHelper();
+                objContact.setName(name);
+                phoneNo.add(phoneNumber);
+                //objContact.setPhone(phoneNumber);
+
+                long inserted = 0;
+                try {
+                    inserted = db.addDetail(objContact);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else if (duplicateName == name) {
+
+                objContact = new ContactHelper();
+                objContact.setName(name);
+                phoneNo.add(phoneNumber);
+                //objContact.setPhone(phoneNumber);
+
+                long inserted = 0;
+                try {
+                    inserted = db.addDetail(objContact);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                objContact.setPhone(phoneNo);
+                phoneNo.clear();
+                duplicateName = null;
             }
+            phones.moveToNext();
+            //}
         }
 
         phones.close();
