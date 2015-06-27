@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import CustomAdapter.PhoneAdapter;
+import HelperClasses.ContactHelper;
 
 public class ViewDetailsActivity extends ActionBarActivity {
 
@@ -22,16 +23,12 @@ public class ViewDetailsActivity extends ActionBarActivity {
         ListView phoneNoList = (ListView) findViewById(R.id.phoneNoList);
         TextView name = (TextView) findViewById(R.id.name);
 
-        String[] details = getIntent().getExtras().getStringArray("Details");
-        name.setText(details[0]);
+        String Name = getIntent().getExtras().getString("Name");
+        ArrayList<String> PhoneNumber = getIntent().getExtras().getStringArrayList("Phone Numbers");
+        name.setText(Name);
 
-        String[] phone = {details[1]};
 
-        ArrayList<String> list = new ArrayList<>();
-
-        Collections.addAll(list, phone);
-
-        PhoneAdapter phoneAdapter = new PhoneAdapter(this, 0, list);
+        PhoneAdapter phoneAdapter = new PhoneAdapter(this, 0, PhoneNumber);
 
         phoneNoList.setAdapter(phoneAdapter);
     }

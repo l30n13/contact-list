@@ -62,8 +62,6 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
         duplicateName = null;
         for (int i = 0; i < phones.getCount(); i++) {
 
-            //while (phones.moveToNext()) {
-
             String name = phones
                     .getString(phones
                             .getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
@@ -77,34 +75,24 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
                 objContact = new ContactHelper();
                 objContact.setName(name);
                 phoneNo.add(phoneNumber);
-                //objContact.setPhone(phoneNumber);
 
-                long inserted = 0;
-                try {
-                    inserted = db.addDetail(objContact);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
             } else if (duplicateName == name) {
 
-                objContact = new ContactHelper();
-                objContact.setName(name);
                 phoneNo.add(phoneNumber);
-                //objContact.setPhone(phoneNumber);
 
-                long inserted = 0;
-                try {
-                    inserted = db.addDetail(objContact);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
             } else {
+
                 objContact.setPhone(phoneNo);
                 phoneNo.clear();
                 duplicateName = null;
+                db.addDetail(objContact);
+                Log.i("Name and phone", name + " " + phoneNo.toString());
+                for(String a:phoneNo)
+                    System.out.println(a);
+                phones.moveToPrevious();
             }
             phones.moveToNext();
-            //}
+
         }
 
         phones.close();
@@ -145,6 +133,7 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
         } else {
             showToast("No Contact Found!!!");
         }
+        print(list);
     }
 
     private void showToast(String msg) {
@@ -153,15 +142,13 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
 
     @Override
     public void onItemClick(AdapterView<?> listview, View v, int position, long id) {
-        //ContactHelper contactHelper = (ContactHelper) listview.getItemAtPosition(position);
-
         Intent i = new Intent(this, ViewDetailsActivity.class);
 
         Log.i("TEST", list.get(position).getName());
 
-        String[] details = {list.get(position).getName(), list.get(position).getPhone()};
 
-        i.putExtra("Details", details);
+        i.putExtra("Name", list.get(position).getName());
+        i.putExtra("Phone Numbers", list.get(position).getPhone());
         startActivity(i);
 
         //showCallDialog(list.get(position).getName(), list.get(position).getPhone());
