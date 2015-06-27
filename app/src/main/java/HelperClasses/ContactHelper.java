@@ -1,5 +1,7 @@
 package HelperClasses;
 
+import java.util.ArrayList;
+
 /**
  * Created by ruhul_000 on 6/22/2015.
  */
@@ -10,7 +12,7 @@ public class ContactHelper {
     private String name;
     private String email;
     private String company;
-    private String phone;
+    private ArrayList<String> phone;
     private String address;
     private String street;
     private String poBox;
@@ -54,11 +56,11 @@ public class ContactHelper {
         this.company = company;
     }
 
-    public String getPhone() {
+    public ArrayList<String> getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(ArrayList<String> phone) {
         this.phone = phone;
     }
 
