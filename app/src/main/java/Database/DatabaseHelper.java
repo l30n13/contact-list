@@ -22,7 +22,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String _ID = "_id";
     private static final String NAME = "name";
     private static final String EMAIL = "email";
-    private static final String PHONE = "phone";
+    private static final String PHONE1 = "phone1";
+    private static final String PHONE2 = "phone2";
+    private static final String PHONE3 = "phone3";
+    private static final String PHONE4 = "phone4";
+    private static final String PHONE5 = "phone5";
+    private static final String PHONE6 = "phone6";
+    private static final String PHONE7 = "phone7";
+    private static final String PHONE8 = "phone8";
+    private static final String PHONE9 = "phone9";
+    private static final String PHONE10 = "phone10";
     private static final String ADDRESS = "address";
     private static final String STREET = "street";
     private static final String PO_BOX = "po_box";
@@ -40,7 +49,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String INFORMATION_TABLE = "create table " + TABLE_NAME + "(" +
             _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             NAME + " TEXT, " +
-            PHONE + " TEXT, " +
+            PHONE1 + " TEXT, " +
+            PHONE2 + " TEXT, " +
+            PHONE3 + " TEXT, " +
+            PHONE4 + " TEXT, " +
+            PHONE5 + " TEXT, " +
+            PHONE6 + " TEXT, " +
+            PHONE7 + " TEXT, " +
+            PHONE8 + " TEXT, " +
+            PHONE9 + " TEXT, " +
+            PHONE10 + " TEXT, " +
             EMAIL + " TEXT, " +
             ADDRESS + " TEXT, " +
             STREET + " TEXT, " +
@@ -76,7 +94,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
         values.put(NAME, info.getName());
-        values.put(PHONE, info.getPhone());
+
+        int i = 1;
+        for (String phone : info.getPhone()) {
+            values.put("phone" + i, phone);
+            i++;
+        }
         values.put(EMAIL, info.getEmail());
         values.put(ADDRESS, info.getAddress());
         values.put(STATE, info.getState());
@@ -94,10 +117,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-
+    /**
+     * Retrieving all data from database
+     *
+     * @return List<ContactHelper> with all data
+     */
     public List<ContactHelper> getAllData() {
-        List<ContactHelper> dataArrayList = new ArrayList<ContactHelper>();
-        String selectQuery = "SELECT " + _ID + ", " + NAME + "," + PHONE + " FROM " + TABLE_NAME;
+        List<ContactHelper> dataArrayList = new ArrayList<>();
+        String selectQuery = "SELECT * FROM " + TABLE_NAME;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(selectQuery, null);
         if (c.moveToFirst()) {
@@ -105,7 +132,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 ContactHelper info = new ContactHelper();
                 info.setId(c.getInt(c.getColumnIndex(_ID)));
                 info.setName(c.getString(c.getColumnIndex(NAME)));
-                info.setPhone(c.getString(c.getColumnIndex(PHONE)));
+
+                ArrayList<String> phoneNo = new ArrayList<>();
+                for (int i = 1; i <= 10; i++) {
+                    phoneNo.add(c.getString(c.getColumnIndex("phone" + i)));
+                }
+                info.setPhone(phoneNo);
 
                 dataArrayList.add(info);
             } while (c.moveToNext());
