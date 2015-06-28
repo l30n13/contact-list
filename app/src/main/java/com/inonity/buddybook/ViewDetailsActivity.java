@@ -2,6 +2,7 @@ package com.inonity.buddybook;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
@@ -15,21 +16,23 @@ import HelperClasses.ContactHelper;
 
 public class ViewDetailsActivity extends ActionBarActivity {
 
+    private ArrayList<String> PhoneNumber = new ArrayList<>();
+    private String Name;
+    private ListView phoneNoList;
+    private TextView name;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_details);
+        phoneNoList = (ListView) findViewById(R.id.phoneNoList);
+        name = (TextView) findViewById(R.id.name);
 
-        ListView phoneNoList = (ListView) findViewById(R.id.phoneNoList);
-        TextView name = (TextView) findViewById(R.id.name);
-
-        String Name = getIntent().getExtras().getString("Name");
-        ArrayList<String> PhoneNumber = getIntent().getExtras().getStringArrayList("Phone Numbers");
+        Name = getIntent().getExtras().getString("Name");
         name.setText(Name);
 
-
+        PhoneNumber = getIntent().getExtras().getStringArrayList("Phone Numbers");
         PhoneAdapter phoneAdapter = new PhoneAdapter(this, 0, PhoneNumber);
-
         phoneNoList.setAdapter(phoneAdapter);
     }
 
