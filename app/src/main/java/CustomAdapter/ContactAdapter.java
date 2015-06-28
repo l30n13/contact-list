@@ -33,7 +33,7 @@ public class ContactAdapter extends ArrayAdapter<ContactHelper> {
         TextView textView = (TextView) view.findViewById(R.id.textViewContactName);
         ImageView imageView = (ImageView) view.findViewById(R.id.imageViewContactImage);
         textView.setText(items.get(position).getName());
-        imageView.setImageResource(R.drawable.contact);
+        imageView.setImageResource(R.drawable.contact_temp);
 
         return view;
     }
