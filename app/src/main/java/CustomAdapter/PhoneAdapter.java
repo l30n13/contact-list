@@ -36,7 +36,7 @@ public class PhoneAdapter extends ArrayAdapter<String> {
 
         View view = inflater.inflate(R.layout.custom_layout_details_phone_number, parent, false);
 
-        EditText phoneNo = (EditText) view.findViewById(R.id.phoneNo);
+        EditText phoneNo = (EditText) view.findViewById(R.id.listPhoneNo);
         /*ImageButton normalCall = (ImageButton) view.findViewById(R.id.normalCall);
         ImageButton videoCall = (ImageButton) view.findViewById(R.id.videoCall);*/
         phoneNo.setText(items.get(position).toString());
