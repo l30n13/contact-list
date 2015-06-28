@@ -8,6 +8,7 @@ import Fragments.ContactsFragment;
 import Fragments.GroupsFragment;
 import Fragments.ReminderFragment;
 
+
 public class TabsPagerAdapter extends FragmentStatePagerAdapter {
 
 	public TabsPagerAdapter(FragmentManager fm) {
@@ -15,27 +16,44 @@ public class TabsPagerAdapter extends FragmentStatePagerAdapter {
 	}
 
 	@Override
-	public Fragment getItem(int index) {
+	public Fragment getItem(int position) {
+		// HomeViewActivity_1.MyFragment myFragment = HomeViewActivity_1.MyFragment.newInstance(position);
+		Fragment myFragment=null;
 
-		switch (index) {
-		case 0:
-			// Top Rated fragment activity
-			return new ReminderFragment();
-		case 1:
-			// Games fragment activity
-			return new ContactsFragment();
-		case 2:
-			// Movies fragment activity
-			return new GroupsFragment();
+
+		if(position == 0){
+			myFragment = new ReminderFragment();
+
 		}
+		else if(position == 1){
+			myFragment = new ContactsFragment();
 
-		return null;
+		}
+		else if(position == 2){
+			myFragment = new GroupsFragment();
+
+		}
+		return myFragment;
 	}
 
 	@Override
 	public int getCount() {
-		// get item count - equal to number of tabs
 		return 3;
 	}
 
+	@Override
+	public CharSequence getPageTitle(int position) {
+		//return "Tab " + (position + 1);
+		String tab = "";
+		if(position == 0){
+			tab = "Reminder";
+		}
+		else if(position == 1){
+			tab = "Contacts";
+		}
+		else  if(position == 2){
+			tab = "Groups";
+		}
+		return tab;
+	}
 }

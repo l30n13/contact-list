@@ -6,7 +6,9 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,14 +16,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import CustomAdapter.TabsPagerAdapter;
+
 
 public class HomeViewActivity_1 extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String SELECTED_ITEM_ID = "selected_item_id";
     private static final String FIRST_TIME = "first_time";
     private Toolbar mToolbar;
+    private TabLayout swipeTabLayout;
     private NavigationView mDrawer;
     private DrawerLayout mDrawerLayout;
+    private ViewPager mPager;
+    private TabsPagerAdapter tabsAdapter;
     private ActionBarDrawerToggle mDrawerToggle;
     private int mSelectedId;
     private boolean mUserSawDrawer = false;
@@ -56,8 +63,17 @@ public class HomeViewActivity_1 extends AppCompatActivity implements NavigationV
         navigate(mSelectedId);
 
 
-    }
+        //swipe tab
+        tabsAdapter = new TabsPagerAdapter(getSupportFragmentManager());
+        swipeTabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        mPager = (ViewPager) findViewById(R.id.pager);
+        mPager.setAdapter(tabsAdapter);
+        swipeTabLayout.setTabsFromPagerAdapter(tabsAdapter);
 
+        swipeTabLayout.setupWithViewPager(mPager);
+        mPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(swipeTabLayout));
+
+    }
 
 
     @Override
@@ -67,7 +83,7 @@ public class HomeViewActivity_1 extends AppCompatActivity implements NavigationV
         return true;
     }
 
-   @Override
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -88,7 +104,7 @@ public class HomeViewActivity_1 extends AppCompatActivity implements NavigationV
 
     //sending navigation to pressed location/item
     public void navigate(int mSelectedId) {
-        Intent intent = null;
+        Intent intent;
         if (mSelectedId == R.id.navigation_item_2) {
             mDrawerLayout.closeDrawer(GravityCompat.START);
             intent = new Intent(this, ContactListActivity.class);
