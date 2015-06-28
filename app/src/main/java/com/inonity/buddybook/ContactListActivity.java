@@ -60,8 +60,10 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
         Cursor phones = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, sortName);
         phones.moveToFirst();
 
+        ArrayList<String> Name = new ArrayList<>();
         ArrayList<String> phoneNo = new ArrayList<>();
         duplicateName = null;
+        objContact = new ContactHelper();
         for (int i = 0; i < phones.getCount(); i++) {
 
             String name = phones
@@ -71,7 +73,8 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
                     .getString(phones
                             .getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
 
-            if (duplicateName == null) {
+
+            /*if (duplicateName == null) {
                 duplicateName = name;
 
                 objContact = new ContactHelper();
@@ -86,9 +89,17 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
                 duplicateName = null;
                 db.addDetail(objContact);
                 Log.i("Name and phone", name + " " + phoneNo.toString());
-                //phones.moveToPrevious();
+                phones.moveToPrevious();
+            }*/
+            if (!(Name.contains(name) && phoneNo.contains(phoneNumber))) {
+                objContact.setName(name);
+                objContact.setPhone(phoneNo);
+                db.addDetail(objContact);
+                Name.add(name);
+                phoneNo.add(phoneNumber);
             }
             phones.moveToNext();
+
 
         }
 
