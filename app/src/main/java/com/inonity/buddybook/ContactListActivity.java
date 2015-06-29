@@ -29,7 +29,7 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
     private ListView listView;
     private ArrayList<ContactHelper> list = new ArrayList<>();
     private ContactHelper objContact;
-    String duplicateName;
+    ArrayList<String> duplicateName = new ArrayList<>();
 
 
     @Override
@@ -61,38 +61,54 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
         phones.moveToFirst();
 
         ArrayList<String> phoneNo = new ArrayList<>();
-        duplicateName = null;
+        //duplicateName = null;
         objContact = new ContactHelper();
+        String name;
+        String phoneNumber;
         for (int i = 0; i < phones.getCount(); i++) {
 
-            String name = phones
-                    .getString(phones
-                            .getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
-            String phoneNumber = phones
-                    .getString(phones
-                            .getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+            if (phones.moveToNext()) {
+                name = phones
+                        .getString(phones
+                                .getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+                phoneNumber = phones
+                        .getString(phones
+                                .getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
 
 
-            if (duplicateName == null) {
-                duplicateName = name;
+                if (!duplicateName.contains(name)) {
+                    duplicateName.add(name);
 
-                objContact = new ContactHelper();
-                objContact.setName(name);
-                phoneNo.add(phoneNumber);
+                    objContact = new ContactHelper();
+                    objContact.setName(name);
+                    phoneNo.add(phoneNumber);
 
-            } else if (duplicateName.equals(name)) {
-                phoneNo.add(phoneNumber);
-            } else {
-                objContact.setPhone(phoneNo);
-                duplicateName = null;
+                }
+                String name1 = null;
+                do {
+                    String phoneNumber1 = phones
+                            .getString(phones
+                                    .getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                    if (!phoneNo.contains(phoneNumber1)) {
+                        phoneNo.add(phoneNumber1);
+                    }
+                    objContact.setPhone(phoneNo);
+
+                    if (phones.moveToNext()) {
+                        name1 = phones
+                                .getString(phones
+                                        .getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+                    }
+                } while (duplicateName.contains(name1));
                 db.addDetail(objContact);
                 Log.i("Name and phone", name + " " + phoneNo.toString());
+                for(String p:phoneNo){
+                    Log.i("Name and phone", p);
+                }
                 phoneNo.clear();
-                //phones.moveToPrevious();
+                duplicateName.clear();
+                phones.moveToPrevious();
             }
-            phones.moveToNext();
-
-
         }
 
         phones.close();
