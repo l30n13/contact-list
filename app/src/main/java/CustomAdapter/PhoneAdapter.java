@@ -24,8 +24,8 @@ public class PhoneAdapter extends ArrayAdapter<String> {
     private final Context context;
     private ArrayList<String> items;
 
-    public PhoneAdapter(Context context, int resource, ArrayList<String> items) {
-        super(context, resource, items);
+    public PhoneAdapter(Context context, ArrayList<String> items) {
+        super(context, R.layout.custom_layout_details_phone_number, items);
         this.context = context;
         this.items = items;
     }
