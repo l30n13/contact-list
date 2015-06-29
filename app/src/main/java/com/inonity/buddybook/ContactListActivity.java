@@ -98,6 +98,7 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
                         name1 = phones
                                 .getString(phones
                                         .getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+                        i++;
                     }
                 } while (duplicateName.contains(name1));
                 db.addDetail(objContact);
@@ -108,6 +109,7 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
                 phoneNo.clear();
                 duplicateName.clear();
                 phones.moveToPrevious();
+                i--;
             }
         }
 
