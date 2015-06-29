@@ -20,11 +20,11 @@ import HelperClasses.ContactHelper;
 /**
  * Created by tonmoy on 6/25/15.
  */
-public class PhoneAdapter extends ArrayAdapter<String> {
+public class PhoneDetailsAdapter extends ArrayAdapter<String> {
     private final Context context;
     private ArrayList<String> items;
 
-    public PhoneAdapter(Context context, ArrayList<String> items) {
+    public PhoneDetailsAdapter(Context context, ArrayList<String> items) {
         super(context, R.layout.custom_layout_details_phone_number, items);
         this.context = context;
         this.items = items;
