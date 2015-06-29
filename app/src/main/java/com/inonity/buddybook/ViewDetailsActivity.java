@@ -5,14 +5,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
-import CustomAdapter.PhoneAdapter;
-import HelperClasses.ContactHelper;
+import CustomAdapter.PhoneDetailsAdapter;
 
 public class ViewDetailsActivity extends ActionBarActivity {
 
@@ -25,7 +25,7 @@ public class ViewDetailsActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_details);
-        phoneNoList = (ListView) findViewById(R.id.phoneNoList);
+//        phoneNoList = (ListView) findViewById(R.id.phoneNoList);
         name = (TextView) findViewById(R.id.name);
 
         Name = getIntent().getExtras().getString("Name");
@@ -33,15 +33,30 @@ public class ViewDetailsActivity extends ActionBarActivity {
 
         PhoneNumber = getIntent().getExtras().getStringArrayList("Phone Numbers");
 
-        try{
-            for(String p: PhoneNumber)
+        LinearLayout layout = (LinearLayout) findViewById(R.id.phoneNoList);
+        int i = 0;
+        try {
+            for (String p : PhoneNumber) {
                 Log.i("Name and phone", p);
-        }catch (Exception e){
+                TextView valueTV = new TextView(this);
+                valueTV.setText(p);
+                //valueTV[i].setId(5);
+                valueTV.setLayoutParams(new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.FILL_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT));
 
+                layout.addView(valueTV);
+                i++;
+            }
+        } catch (Exception e) {
+            int a = PhoneNumber.lastIndexOf(PhoneNumber);
+            Log.i("Name and phone", String.valueOf(a));
         }
 
-        PhoneAdapter phoneAdapter = new PhoneAdapter(this, 0, PhoneNumber);
-        phoneNoList.setAdapter(phoneAdapter);
+
+        //PhoneDetailsAdapter phoneAdapter = new PhoneDetailsAdapter(this, PhoneNumber);
+        //ArrayAdapter<String> phoneAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, PhoneNumber);
+        //phoneNoList.setAdapter(phoneAdapter);
     }
 
     @Override

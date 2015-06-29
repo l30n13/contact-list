@@ -129,7 +129,7 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
 
                 @Override
                 public int compare(ContactHelper lhs, ContactHelper rhs) {
-                    return lhs.getName().compareTo(rhs.getName());
+                    return lhs.getName().toLowerCase().compareTo(rhs.getName().toLowerCase());
                 }
             });
             AlertDialog alert = new AlertDialog.Builder(ContactListActivity.this).create();
@@ -195,7 +195,7 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
     }
 
     private void print(List<ContactHelper> list) {
-        ContactAdapter objAdapter = new ContactAdapter(this, 0, list);
+        ContactAdapter objAdapter = new ContactAdapter(this, list);
         listView.setAdapter(objAdapter);
     }
 }
