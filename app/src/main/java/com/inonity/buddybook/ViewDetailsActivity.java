@@ -32,6 +32,14 @@ public class ViewDetailsActivity extends ActionBarActivity {
         name.setText(Name);
 
         PhoneNumber = getIntent().getExtras().getStringArrayList("Phone Numbers");
+
+        try{
+            for(String p: PhoneNumber)
+                Log.i("Name and phone", p);
+        }catch (Exception e){
+
+        }
+
         PhoneAdapter phoneAdapter = new PhoneAdapter(this, 0, PhoneNumber);
         phoneNoList.setAdapter(phoneAdapter);
     }
