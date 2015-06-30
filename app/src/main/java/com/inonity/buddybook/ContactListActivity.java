@@ -92,7 +92,6 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
                     if (!phoneNo.contains(phoneNumber1)) {
                         phoneNo.add(phoneNumber1);
                     }
-                    objContact.setPhone(phoneNo);
 
                     if (phones.moveToNext()) {
                         name1 = phones
@@ -101,6 +100,7 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
                         i++;
                     }
                 } while (duplicateName.contains(name1));
+                objContact.setPhone(phoneNo);
                 db.addDetail(objContact);
                 Log.i("Name and phone", name + " " + phoneNo.toString());
                 for(String p:phoneNo){
