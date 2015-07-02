@@ -114,7 +114,7 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
                     return lhs.getName().toLowerCase().compareTo(rhs.getName().toLowerCase());
                 }
             });
-            AlertDialog alert = new AlertDialog.Builder(ContactListActivity.this).create();
+            /*AlertDialog alert = new AlertDialog.Builder(ContactListActivity.this).create();
             alert.setTitle("");
 
             alert.setMessage(list.size() + " Contact Found!!!");
@@ -126,7 +126,7 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
                     dialog.dismiss();
                 }
             });
-            alert.show();
+            alert.show();*/
 
         } else {
             showToast("No Contact Found!!!");
