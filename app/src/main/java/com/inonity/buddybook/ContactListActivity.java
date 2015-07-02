@@ -2,6 +2,7 @@ package com.inonity.buddybook;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -29,7 +31,6 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
     private ListView listView;
     private ArrayList<ContactHelper> list = new ArrayList<>();
     private ContactHelper objContact;
-    ArrayList<String> duplicateName = new ArrayList<>();
 
 
     @Override
@@ -54,62 +55,40 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
      */
     private void getDataFromPhone() {
         db = new DatabaseHelper(this);
+        ContentResolver cr = getContentResolver();
 
         String sortName = ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " ASC";
 
-        Cursor phones = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, sortName);
-        phones.moveToFirst();
+        Cursor phones = getContentResolver().query(ContactsContract.Contacts.CONTENT_URI, null, null, null, sortName);
 
         ArrayList<String> phoneNo = new ArrayList<>();
-        //duplicateName = null;
+
         objContact = new ContactHelper();
-        String name;
-        String phoneNumber;
-        for (int i = 0; i < phones.getCount(); i++) {
+        String phoneNumber, image_uri = null;
+        if (phones.getCount() > 0) {
+            while (phones.moveToNext()) {
+                String id = phones.getString(phones.getColumnIndex(ContactsContract.Contacts._ID));
+                String name = phones.getString(phones.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
 
-            if (phones.moveToNext()) {
-                name = phones
-                        .getString(phones
-                                .getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
-                phoneNumber = phones
-                        .getString(phones
-                                .getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-
-
-                if (!duplicateName.contains(name)) {
-                    duplicateName.add(name);
-
+                image_uri = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.PHOTO_URI));
+                if (Integer.parseInt(phones.getString(phones.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
                     objContact = new ContactHelper();
                     objContact.setName(name);
-                    phoneNo.add(phoneNumber);
 
-                }
-                String name1 = null;
-                do {
-                    String phoneNumber1 = phones
-                            .getString(phones
-                                    .getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                    if (!phoneNo.contains(phoneNumber1)) {
-                        phoneNo.add(phoneNumber1);
-                    }
+                    Cursor pCur = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
+                            ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?", new String[]{id}, null);
+                    while (pCur.moveToNext()) {
+                        phoneNumber = pCur.getString(pCur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                        phoneNo.add(phoneNumber);
 
-                    if (phones.moveToNext()) {
-                        name1 = phones
-                                .getString(phones
-                                        .getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
-                        i++;
                     }
-                } while (duplicateName.contains(name1));
-                objContact.setPhone(phoneNo);
-                db.addDetail(objContact);
-                Log.i("Name and phone", name + " " + phoneNo.toString());
-                for (String p : phoneNo) {
-                    Log.i("Name and phone", p);
+                    pCur.close();
+                    Log.i("Name and phone", name + " " + phoneNo.toString());
+                    objContact.setPhone(phoneNo);
+                    db.addDetail(objContact);
+                    phoneNo.clear();
                 }
-                phoneNo.clear();
-                duplicateName.clear();
-                phones.moveToPrevious();
-                i--;
+
             }
         }
 
