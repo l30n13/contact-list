@@ -5,8 +5,11 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -15,8 +18,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
+import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
 
 import CustomAdapter.TabsPagerAdapter;
+import Fragments.ContactsFragment;
+import HelperClasses.SocialSiteContacts;
 
 
 public class HomeViewActivity_1 extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -32,12 +43,15 @@ public class HomeViewActivity_1 extends AppCompatActivity implements NavigationV
     private ActionBarDrawerToggle mDrawerToggle;
     private int mSelectedId;
     private boolean mUserSawDrawer = false;
+    private FloatingActionButton mFAB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_view_activity_1);
 
+/*        mFAB = (FloatingActionButton) findViewById(R.id.fab);
+        mFAB.setOnClickListener(mFabClickListener);*/
         /*
         * navigation drawer
         * */
@@ -63,7 +77,7 @@ public class HomeViewActivity_1 extends AppCompatActivity implements NavigationV
         navigate(mSelectedId);
 
 
-        //swipe tab
+        //swipe  tab
         tabsAdapter = new TabsPagerAdapter(getSupportFragmentManager());
         swipeTabLayout = (TabLayout) findViewById(R.id.tab_layout);
         mPager = (ViewPager) findViewById(R.id.pager);
@@ -72,6 +86,64 @@ public class HomeViewActivity_1 extends AppCompatActivity implements NavigationV
 
         swipeTabLayout.setupWithViewPager(mPager);
         mPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(swipeTabLayout));
+
+
+
+        /*
+        * floting faction button
+        * */
+        ImageView imageView = new ImageView(this);
+        imageView.setImageResource(R.drawable.ic_add_black);
+
+
+        com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton actionButton = new com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton.Builder(this)
+                .setContentView(imageView)
+                .build();
+
+        ImageView iconItem1 = new ImageView(this);
+        iconItem1.setImageResource(R.drawable.ic_add_black);
+        ImageView iconItem2 = new ImageView(this);
+        iconItem2.setImageResource(R.drawable.ic_add_black);
+        ImageView iconItem3 = new ImageView(this);
+        iconItem3.setImageResource(R.drawable.ic_add_black);
+
+        SubActionButton.Builder itemBuilder = new SubActionButton.Builder(this);
+
+        SubActionButton buttonItem1 = itemBuilder.setContentView(iconItem1).build();
+        SubActionButton buttonItem2 = itemBuilder.setContentView(iconItem2).build();
+        SubActionButton buttonItem3 = itemBuilder.setContentView(iconItem3).build();
+
+
+        FloatingActionMenu actionMenu = new FloatingActionMenu.Builder(this)
+
+                .addSubActionView(buttonItem1)
+                .addSubActionView(buttonItem2)
+                .addSubActionView(buttonItem3)
+                .attachTo(actionButton)
+                .build();
+
+        buttonItem1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Item 1 Clicked", Toast.LENGTH_LONG).show();
+
+            }
+        });
+        buttonItem2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(),"Item 2 Clicked",Toast.LENGTH_LONG).show();
+
+            }
+        });
+        buttonItem3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(),"Item 3 Clicked",Toast.LENGTH_LONG).show();
+
+            }
+        });
+
 
     }
 
@@ -105,9 +177,24 @@ public class HomeViewActivity_1 extends AppCompatActivity implements NavigationV
     //sending navigation to pressed location/item
     public void navigate(int mSelectedId) {
         Intent intent;
+        if(mSelectedId ==  R.id.navigation_item_1){
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+            Fragment drawerFragment = new ContactsFragment();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container,drawerFragment)
+                    .commit();
+
+        }
+
         if (mSelectedId == R.id.navigation_item_2) {
             mDrawerLayout.closeDrawer(GravityCompat.START);
             intent = new Intent(this, ContactListActivity.class);
+            startActivity(intent);
+        }
+        if (mSelectedId == R.id.navigation_item_5) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+            intent = new Intent(this, SocialSiteContacts.class);
             startActivity(intent);
         }
 
@@ -167,4 +254,21 @@ public class HomeViewActivity_1 extends AppCompatActivity implements NavigationV
         /*
     * End of navigation drawer methods
     * */
+
+    //action on clicking fab button
+  /*  private View.OnClickListener mFabClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            PopupMenu popup = new PopupMenu(getBaseContext(),v);popup.getMenuInflater()
+            .inflate(R.menu.popup,popup.getMenu());popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem menuItem) {
+                    Toast.makeText(getBaseContext(),"You Selected "+menuItem.getTitle(),Toast.LENGTH_LONG).show();
+
+                    return true;
+                }
+            });
+            popup.show();
+        }
+    };*/
 }

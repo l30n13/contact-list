@@ -22,11 +22,11 @@ public class TabsPagerAdapter extends FragmentStatePagerAdapter {
 
 
 		if(position == 0){
-			myFragment = new ReminderFragment();
+			myFragment = new ContactsFragment();
 
 		}
 		else if(position == 1){
-			myFragment = new ContactsFragment();
+			myFragment = new ReminderFragment();
 
 		}
 		else if(position == 2){
@@ -46,10 +46,10 @@ public class TabsPagerAdapter extends FragmentStatePagerAdapter {
 		//return "Tab " + (position + 1);
 		String tab = "";
 		if(position == 0){
-			tab = "Reminder";
+			tab = "Contacts";
 		}
 		else if(position == 1){
-			tab = "Contacts";
+			tab = "Groups";
 		}
 		else  if(position == 2){
 			tab = "Groups";
