@@ -77,7 +77,7 @@ public class HomeViewActivity_1 extends AppCompatActivity implements NavigationV
         navigate(mSelectedId);
 
 
-        //swipe tab
+        //swipe  tab
         tabsAdapter = new TabsPagerAdapter(getSupportFragmentManager());
         swipeTabLayout = (TabLayout) findViewById(R.id.tab_layout);
         mPager = (ViewPager) findViewById(R.id.pager);
