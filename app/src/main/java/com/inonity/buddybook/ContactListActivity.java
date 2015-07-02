@@ -103,7 +103,7 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
                 objContact.setPhone(phoneNo);
                 db.addDetail(objContact);
                 Log.i("Name and phone", name + " " + phoneNo.toString());
-                for(String p:phoneNo){
+                for (String p : phoneNo) {
                     Log.i("Name and phone", p);
                 }
                 phoneNo.clear();
@@ -115,6 +115,7 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
 
         phones.close();
     }
+
 
     /**
      * Retrieve saved data from database
@@ -196,6 +197,11 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
         alert.show();
     }
 
+    /**
+     * Printing all data from database into display
+     *
+     * @param list Gets all the numbers
+     */
     private void print(List<ContactHelper> list) {
         ContactAdapter objAdapter = new ContactAdapter(this, list);
         listView.setAdapter(objAdapter);
