@@ -5,23 +5,23 @@
     <item
         android:id="@+id/navigation_item_1"
         android:icon="@drawable/ic_number_0"
-        android:title="Item1" />
+        android:title="@string/drawer_menu1" />
     <item
         android:id="@+id/navigation_item_2"
         android:icon="@drawable/ic_number_1"
-        android:title="Content List" />
+        android:title="@string/drawer_menu2" />
     <item
         android:id="@+id/navigation_item_3"
         android:icon="@drawable/ic_number_2"
-        android:title="Item3" />
+        android:title="@string/drawer_menu3" />
     <item
         android:id="@+id/navigation_item_4"
         android:icon="@drawable/ic_number_3"
-        android:title="Item4" />
+        android:title="@string/drawer_menu4" />
     <item
         android:id="@+id/navigation_item_5"
         android:icon="@drawable/ic_number_4"
-        android:title="Item5" />
+        android:title="@string/drawer_menu5" />
 
 
 
