@@ -11,6 +11,7 @@ public class ContactHelper {
     private int id;
     private String name;
     private String email;
+    private String image;
     private String company;
     private ArrayList<String> phone;
     private String address;
@@ -46,6 +47,14 @@ public class ContactHelper {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getImage() {
+        return image;
     }
 
     public String getCompany() {
