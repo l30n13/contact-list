@@ -1,6 +1,9 @@
 package CustomAdapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,16 +27,28 @@ public class ContactAdapter extends ArrayAdapter<ContactHelper> {
         this.context = context;
         this.items = items;
     }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View view = inflater.inflate(R.layout.custom_layout_name_pic_display, parent, false);
 
+        Bitmap bitmap = null;
+
         TextView textView = (TextView) view.findViewById(R.id.textViewContactName);
-        ImageView imageView = (ImageView) view.findViewById(R.id.imageViewContactImage);
         textView.setText(items.get(position).getName());
-        imageView.setImageResource(R.drawable.contact_temp);
+
+        ImageView imageView = (ImageView) view.findViewById(R.id.imageViewContactImage);
+
+        //Converting String into Bitmap format
+        try {
+            byte[] encodeByte = Base64.decode(items.get(position).getImage(), Base64.DEFAULT);
+            bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        imageView.setImageBitmap(bitmap);
 
         return view;
     }

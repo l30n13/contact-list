@@ -7,10 +7,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +25,9 @@ import android.widget.Toast;
 import com.inonity.buddybook.R;
 import com.inonity.buddybook.ViewDetailsActivity;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -50,12 +56,9 @@ public class ContactsFragment extends Fragment implements AdapterView.OnItemClic
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        thisContext = container.getContext();
-        // Inflate the layout for this fragment
-        View rootview = inflater.inflate(R.layout.fragment_contacts, container, false);
-        listView = (ListView) rootview.findViewById(R.id.listViewContactsFragment);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getActivity().setContentView(R.layout.activity_content_list);
 
         //Checking if the database is empty
         db = new DatabaseHelper(getActivity());
@@ -66,9 +69,6 @@ public class ContactsFragment extends Fragment implements AdapterView.OnItemClic
             getDataFromPhone();
             showDataFromDatabase();
         }
-
-
-        return rootview;
     }
 
 
@@ -87,15 +87,36 @@ public class ContactsFragment extends Fragment implements AdapterView.OnItemClic
 
         objContact = new ContactHelper();
         String phoneNumber, image_uri = null;
+        Bitmap image = null;
         if (phones.getCount() > 0) {
             while (phones.moveToNext()) {
                 String id = phones.getString(phones.getColumnIndex(ContactsContract.Contacts._ID));
                 String name = phones.getString(phones.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-
                 image_uri = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.PHOTO_URI));
+
                 if (Integer.parseInt(phones.getString(phones.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
                     objContact = new ContactHelper();
                     objContact.setName(name);
+
+                    if (image_uri != null) {
+                        try {
+                            image = MediaStore.Images.Media
+                                    .getBitmap(getActivity().getContentResolver(),
+                                            Uri.parse(image_uri));
+                            //making String to Bitmap
+                            ByteArrayOutputStream ByteStream = new ByteArrayOutputStream();
+                            image.compress(Bitmap.CompressFormat.PNG, 100, ByteStream);
+                            byte[] b = ByteStream.toByteArray();
+                            String temp = Base64.encodeToString(b, Base64.DEFAULT);
+                            objContact.setImage(temp);
+                        } catch (FileNotFoundException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+                    }
 
                     Cursor pCur = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
                             ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?", new String[]{id}, null);
@@ -117,13 +138,14 @@ public class ContactsFragment extends Fragment implements AdapterView.OnItemClic
         phones.close();
     }
 
+
     /**
      * Retrieve saved data from database
      */
     private void showDataFromDatabase() {
-
+        listView = (ListView) getActivity().findViewById(R.id.listViewContacts);
         listView.setOnItemClickListener(this);
-        list = (ArrayList<ContactHelper>) db.getAllData();
+        list = db.getAllData();
         print(list);
 
 
@@ -135,7 +157,7 @@ public class ContactsFragment extends Fragment implements AdapterView.OnItemClic
                     return lhs.getName().toLowerCase().compareTo(rhs.getName().toLowerCase());
                 }
             });
-            /*AlertDialog alert = new AlertDialog.Builder(getActivity()).create();
+            /*AlertDialog alert = new AlertDialog.Builder(ContactListActivity.this).create();
             alert.setTitle("");
 
             alert.setMessage(list.size() + " Contact Found!!!");
@@ -166,6 +188,7 @@ public class ContactsFragment extends Fragment implements AdapterView.OnItemClic
 
 
         i.putExtra("Name", list.get(position).getName());
+        i.putExtra("Image", list.get(position).getImage());
         i.putExtra("Phone Numbers", list.get(position).getPhone());
         startActivity(i);
 
@@ -197,6 +220,11 @@ public class ContactsFragment extends Fragment implements AdapterView.OnItemClic
         alert.show();
     }
 
+    /**
+     * Printing all data from database into display
+     *
+     * @param list Gets all the numbers
+     */
     private void print(List<ContactHelper> list) {
         ContactAdapter objAdapter = new ContactAdapter(getActivity(), list);
         listView.setAdapter(objAdapter);

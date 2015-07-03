@@ -1,11 +1,15 @@
 package com.inonity.buddybook;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -18,8 +22,11 @@ public class ViewDetailsActivity extends ActionBarActivity {
 
     private ArrayList<String> PhoneNumber = new ArrayList<>();
     private String Name;
+    private String Image;
     private ListView phoneNoList;
     private TextView name;
+    private ImageView image;
+    private Bitmap bitmap = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +34,19 @@ public class ViewDetailsActivity extends ActionBarActivity {
         setContentView(R.layout.activity_view_details);
 //        phoneNoList = (ListView) findViewById(R.id.phoneNoList);
         name = (TextView) findViewById(R.id.name);
-
         Name = getIntent().getExtras().getString("Name");
         name.setText(Name);
+
+        image = (ImageView) findViewById(R.id.imageView);
+        Image = getIntent().getExtras().getString("Image");
+
+        try {
+            byte[] encodeByte = Base64.decode(Image, Base64.DEFAULT);
+            bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        image.setImageBitmap(bitmap);
 
         PhoneNumber = getIntent().getExtras().getStringArrayList("Phone Numbers");
 

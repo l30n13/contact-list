@@ -6,16 +6,21 @@ import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -65,15 +70,36 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
 
         objContact = new ContactHelper();
         String phoneNumber, image_uri = null;
+        Bitmap image = null;
         if (phones.getCount() > 0) {
             while (phones.moveToNext()) {
                 String id = phones.getString(phones.getColumnIndex(ContactsContract.Contacts._ID));
                 String name = phones.getString(phones.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-
                 image_uri = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.PHOTO_URI));
+
                 if (Integer.parseInt(phones.getString(phones.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
                     objContact = new ContactHelper();
                     objContact.setName(name);
+
+                    if (image_uri != null) {
+                        try {
+                            image = MediaStore.Images.Media
+                                    .getBitmap(this.getContentResolver(),
+                                            Uri.parse(image_uri));
+                            //making String to Bitmap
+                            ByteArrayOutputStream ByteStream = new ByteArrayOutputStream();
+                            image.compress(Bitmap.CompressFormat.PNG, 100, ByteStream);
+                            byte[] b = ByteStream.toByteArray();
+                            String temp = Base64.encodeToString(b, Base64.DEFAULT);
+                            objContact.setImage(temp);
+                        } catch (FileNotFoundException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+                    }
 
                     Cursor pCur = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
                             ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?", new String[]{id}, null);
@@ -102,7 +128,7 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
     private void showDataFromDatabase() {
         listView = (ListView) findViewById(R.id.listViewContacts);
         listView.setOnItemClickListener(this);
-        list = (ArrayList<ContactHelper>) db.getAllData();
+        list = db.getAllData();
         print(list);
 
 
@@ -145,6 +171,7 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
 
 
         i.putExtra("Name", list.get(position).getName());
+        i.putExtra("Image", list.get(position).getImage());
         i.putExtra("Phone Numbers", list.get(position).getPhone());
         startActivity(i);
 
