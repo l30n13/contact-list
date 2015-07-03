@@ -21,6 +21,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //table columns
     private static final String _ID = "_id";
     private static final String NAME = "name";
+    private static final String IMAGE = "image";
     private static final String EMAIL = "email";
     private static final String PHONE1 = "phone1";
     private static final String PHONE2 = "phone2";
@@ -49,6 +50,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String INFORMATION_TABLE = "create table " + TABLE_NAME + "(" +
             _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             NAME + " TEXT, " +
+            IMAGE + " TEXT, " +
             PHONE1 + " TEXT, " +
             PHONE2 + " TEXT, " +
             PHONE3 + " TEXT, " +
@@ -100,6 +102,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put("phone" + i, phone);
             i++;
         }
+        values.put(IMAGE, info.getImage());
         values.put(EMAIL, info.getEmail());
         values.put(ADDRESS, info.getAddress());
         values.put(STATE, info.getState());
@@ -122,8 +125,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      *
      * @return List<ContactHelper> with all data
      */
-    public List<ContactHelper> getAllData() {
-        List<ContactHelper> dataArrayList = new ArrayList<>();
+    public ArrayList<ContactHelper> getAllData() {
+        ArrayList<ContactHelper> dataArrayList = new ArrayList<>();
         String selectQuery = "SELECT * FROM " + TABLE_NAME;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(selectQuery, null);
@@ -132,6 +135,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 ContactHelper info = new ContactHelper();
                 info.setId(c.getInt(c.getColumnIndex(_ID)));
                 info.setName(c.getString(c.getColumnIndex(NAME)));
+                info.setImage(c.getString(c.getColumnIndex(IMAGE)));
 
                 ArrayList<String> phoneNo = new ArrayList<>();
                 for (int i = 1; i <= 10; i++) {
