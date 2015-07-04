@@ -27,7 +27,7 @@ import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
 
 import CustomAdapter.TabsPagerAdapter;
 import Fragments.ContactsFragment;
-import HelperClasses.SocialSiteContacts;
+
 
 
 public class HomeViewActivity_1 extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -90,10 +90,12 @@ public class HomeViewActivity_1 extends AppCompatActivity implements NavigationV
 
 
         /*
-        * floting faction button
+        * floting Fab Aaction button
         * */
         ImageView imageView = new ImageView(this);
         imageView.setImageResource(R.drawable.ic_add_black);
+
+
 
 
         com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton actionButton = new com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton.Builder(this)
@@ -101,48 +103,50 @@ public class HomeViewActivity_1 extends AppCompatActivity implements NavigationV
                 .build();
 
         ImageView iconItem1 = new ImageView(this);
-        iconItem1.setImageResource(R.drawable.ic_add_black);
+
+        iconItem1.setImageResource(R.drawable.ic_action_add_person);
         ImageView iconItem2 = new ImageView(this);
-        iconItem2.setImageResource(R.drawable.ic_add_black);
+        iconItem2.setImageResource(R.drawable.ic_action_search);
         ImageView iconItem3 = new ImageView(this);
-        iconItem3.setImageResource(R.drawable.ic_add_black);
+        iconItem3.setImageResource(R.drawable.ic_action_add_group);
 
         SubActionButton.Builder itemBuilder = new SubActionButton.Builder(this);
 
-        SubActionButton buttonItem1 = itemBuilder.setContentView(iconItem1).build();
-        SubActionButton buttonItem2 = itemBuilder.setContentView(iconItem2).build();
-        SubActionButton buttonItem3 = itemBuilder.setContentView(iconItem3).build();
+        SubActionButton buttonAddNewContact = itemBuilder.setContentView(iconItem1).build();
+        SubActionButton buttonSearch = itemBuilder.setContentView(iconItem2).build();
+        SubActionButton buttonAddNewGroup = itemBuilder.setContentView(iconItem3).build();
 
 
         FloatingActionMenu actionMenu = new FloatingActionMenu.Builder(this)
 
-                .addSubActionView(buttonItem1)
-                .addSubActionView(buttonItem2)
-                .addSubActionView(buttonItem3)
+                .addSubActionView(buttonAddNewContact)
+                .addSubActionView(buttonSearch)
+                .addSubActionView(buttonAddNewGroup)
                 .attachTo(actionButton)
                 .build();
 
-        buttonItem1.setOnClickListener(new View.OnClickListener() {
+        buttonAddNewContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Item 1 Clicked", Toast.LENGTH_LONG).show();
 
             }
         });
-        buttonItem2.setOnClickListener(new View.OnClickListener() {
+        buttonSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(),"Item 2 Clicked",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Item 2 Clicked", Toast.LENGTH_LONG).show();
 
             }
         });
-        buttonItem3.setOnClickListener(new View.OnClickListener() {
+        buttonAddNewGroup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(),"Item 3 Clicked",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Item 3 Clicked", Toast.LENGTH_LONG).show();
 
             }
         });
+        //end of floating fab
 
 
     }
@@ -192,11 +196,7 @@ public class HomeViewActivity_1 extends AppCompatActivity implements NavigationV
             intent = new Intent(this, ContactListActivity.class);
             startActivity(intent);
         }
-        if (mSelectedId == R.id.navigation_item_5) {
-            mDrawerLayout.closeDrawer(GravityCompat.START);
-            intent = new Intent(this, SocialSiteContacts.class);
-            startActivity(intent);
-        }
+
 
     }
     private boolean didUserSeeDrawer() {

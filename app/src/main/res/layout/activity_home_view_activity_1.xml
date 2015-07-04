@@ -31,10 +31,11 @@
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorAccent"
+            android:background="@color/colorPrimary"
             app:tabGravity="fill"
             app:tabTextAppearance="@style/TextAppearance.Design.Tab"
-            app:tabSelectedTextColor="@color/material_deep_teal_200"
+            app:tabSelectedTextColor="@color/colorAccent"
+
             app:tabMode="scrollable" />
 
         <android.support.v4.view.ViewPager
