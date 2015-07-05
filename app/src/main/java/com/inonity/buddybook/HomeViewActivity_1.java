@@ -128,7 +128,9 @@ public class HomeViewActivity_1 extends AppCompatActivity implements NavigationV
         buttonAddNewContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Item 1 Clicked", Toast.LENGTH_LONG).show();
+              //  Toast.makeText(getApplicationContext(), "Item 1 Clicked", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(HomeViewActivity_1.this,AddNewContactActivity.class);
+                startActivity(intent);
 
             }
         });
