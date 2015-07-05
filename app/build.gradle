@@ -20,10 +20,11 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'it.neokree:MaterialTabs:0.11'
     compile 'com.android.support:design:22.2.0'
     compile 'com.android.support:support-v4:22.2.0'
     compile 'com.oguzdev:CircularFloatingActionMenu:1.0.2'
+    compile files('libs/universal-image-loader-1.9.4.jar')
 }

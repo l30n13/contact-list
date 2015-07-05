@@ -80,26 +80,8 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
                 if (Integer.parseInt(phones.getString(phones.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
                     objContact = new ContactHelper();
                     objContact.setName(name);
+                    objContact.setImage(image_uri);
 
-                    if (image_uri != null) {
-                        try {
-                            image = MediaStore.Images.Media
-                                    .getBitmap(this.getContentResolver(),
-                                            Uri.parse(image_uri));
-                            //making String to Bitmap
-                            ByteArrayOutputStream ByteStream = new ByteArrayOutputStream();
-                            image.compress(Bitmap.CompressFormat.PNG, 100, ByteStream);
-                            byte[] b = ByteStream.toByteArray();
-                            String temp = Base64.encodeToString(b, Base64.DEFAULT);
-                            objContact.setImage(temp);
-                        } catch (FileNotFoundException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
-                        } catch (IOException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
-                        }
-                    }
 
                     Cursor pCur = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
                             ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?", new String[]{id}, null);
@@ -109,7 +91,7 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
 
                     }
                     pCur.close();
-                    Log.i("Name and phone", name + " " + phoneNo.toString());
+                    Log.i("Name and phone", name + " " + phoneNo.toString() + image_uri);
                     objContact.setPhone(phoneNo);
                     db.addDetail(objContact);
                     phoneNo.clear();

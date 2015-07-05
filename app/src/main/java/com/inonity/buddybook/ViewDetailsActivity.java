@@ -2,6 +2,8 @@ package com.inonity.buddybook;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -40,13 +42,16 @@ public class ViewDetailsActivity extends ActionBarActivity {
         image = (ImageView) findViewById(R.id.imageView);
         Image = getIntent().getExtras().getString("Image");
 
-        try {
+        /*try {
             byte[] encodeByte = Base64.decode(Image, Base64.DEFAULT);
             bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
         } catch (Exception e) {
             e.getMessage();
+        }*/
+
+        if (image != null) {
+            image.setImageURI(Uri.parse(Image));
         }
-        image.setImageBitmap(bitmap);
 
         PhoneNumber = getIntent().getExtras().getStringArrayList("Phone Numbers");
 

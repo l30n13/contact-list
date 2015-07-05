@@ -3,6 +3,8 @@ package CustomAdapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,14 +44,17 @@ public class ContactAdapter extends ArrayAdapter<ContactHelper> {
         ImageView imageView = (ImageView) view.findViewById(R.id.imageViewContactImage);
 
         //Converting String into Bitmap format
-        try {
+        /*try {
             byte[] encodeByte = Base64.decode(items.get(position).getImage(), Base64.DEFAULT);
             bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
         } catch (Exception e) {
             e.getMessage();
-        }
-        imageView.setImageBitmap(bitmap);
+        }*/
+        String image_uri = items.get(position).getImage();
 
+        if (image_uri != null) {
+            imageView.setImageURI(Uri.parse(image_uri));
+        }
         return view;
     }
 }
