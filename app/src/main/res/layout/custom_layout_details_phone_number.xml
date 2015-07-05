@@ -22,11 +22,12 @@
 
         <ImageButton
             android:id="@+id/normalCall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
             android:layout_weight="1"
             android:onClick="normalCall"
-            android:src="@drawable/abc_btn_radio_to_on_mtrl_015" />
+            android:src="@drawable/call" />
 
         <ImageButton
             android:id="@+id/videoCall"
