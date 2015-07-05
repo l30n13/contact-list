@@ -96,11 +96,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(NAME, info.getName());
 
         int i = 1;
-        for (String phone : info.getPhone()) {
+/*        for (String phone : info.getPhone()) {
             values.put("phone" + i, phone);
             i++;
-        }
+        }*/
         values.put(EMAIL, info.getEmail());
+        values.put(NAME,info.getName());
+        values.put(PHONE1,info.getPhone1());
+        values.put(PHONE2,info.getPhone2());
+        values.put(PHONE3,info.getPhone3());
         values.put(ADDRESS, info.getAddress());
         values.put(STATE, info.getState());
         values.put(STREET, info.getStreet());

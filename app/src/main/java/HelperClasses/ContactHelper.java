@@ -22,6 +22,18 @@ public class ContactHelper {
     private String zipCode;
     private String note;
     private String groups;
+    private String email1;
+    private String email2;
+    private String email3;
+    private String email4;
+    private String email5;
+    private String emailType1,emailType2,emailType3,emailType4,emailType5;
+    private String phone1;
+    private String phone2;
+    private String phone3;
+    private String phone4;
+    private String phone5;
+    private String phoneType1,phoneType2,phoneType3,phoneType4,phoneType5;
 
 
     public int getId() {
@@ -134,5 +146,165 @@ public class ContactHelper {
 
     public void setGroups(String groups) {
         this.groups = groups;
+    }
+
+    public String getEmail1() {
+        return email1;
+    }
+
+    public void setEmail1(String email1) {
+        this.email1 = email1;
+    }
+
+    public String getEmail2() {
+        return email2;
+    }
+
+    public void setEmail2(String email2) {
+        this.email2 = email2;
+    }
+
+    public String getEmail3() {
+        return email3;
+    }
+
+    public void setEmail3(String email3) {
+        this.email3 = email3;
+    }
+
+    public String getEmail4() {
+        return email4;
+    }
+
+    public void setEmail4(String email4) {
+        this.email4 = email4;
+    }
+
+    public String getEmail5() {
+        return email5;
+    }
+
+    public void setEmail5(String email5) {
+        this.email5 = email5;
+    }
+
+    public String getPhone1() {
+        return phone1;
+    }
+
+    public void setPhone1(String phone1) {
+        this.phone1 = phone1;
+    }
+
+    public String getPhone2() {
+        return phone2;
+    }
+
+    public void setPhone2(String phone2) {
+        this.phone2 = phone2;
+    }
+
+    public String getPhone3() {
+        return phone3;
+    }
+
+    public void setPhone3(String phone3) {
+        this.phone3 = phone3;
+    }
+
+    public String getPhone4() {
+        return phone4;
+    }
+
+    public void setPhone4(String phone4) {
+        this.phone4 = phone4;
+    }
+
+    public String getPhone5() {
+        return phone5;
+    }
+
+    public void setPhone5(String phone5) {
+        this.phone5 = phone5;
+    }
+
+    public String getEmailType1() {
+        return emailType1;
+    }
+
+    public void setEmailType1(String emailType1) {
+        this.emailType1 = emailType1;
+    }
+
+    public String getEmailType2() {
+        return emailType2;
+    }
+
+    public void setEmailType2(String emailType2) {
+        this.emailType2 = emailType2;
+    }
+
+    public String getEmailType3() {
+        return emailType3;
+    }
+
+    public void setEmailType3(String emailType3) {
+        this.emailType3 = emailType3;
+    }
+
+    public String getEmailType4() {
+        return emailType4;
+    }
+
+    public void setEmailType4(String emailType4) {
+        this.emailType4 = emailType4;
+    }
+
+    public String getEmailType5() {
+        return emailType5;
+    }
+
+    public void setEmailType5(String emailType5) {
+        this.emailType5 = emailType5;
+    }
+
+    public String getPhoneType1() {
+        return phoneType1;
+    }
+
+    public void setPhoneType1(String phoneType1) {
+        this.phoneType1 = phoneType1;
+    }
+
+    public String getPhoneType3() {
+        return phoneType3;
+    }
+
+    public void setPhoneType3(String phoneType3) {
+        this.phoneType3 = phoneType3;
+    }
+
+    public String getPhoneType2() {
+        return phoneType2;
+    }
+
+    public void setPhoneType2(String phoneType2) {
+        this.phoneType2 = phoneType2;
+    }
+
+    public String getPhoneType4() {
+        return phoneType4;
+    }
+
+    public void setPhoneType4(String phoneType4) {
+        this.phoneType4 = phoneType4;
+    }
+
+    public String getPhoneType5() {
+        return phoneType5;
+    }
+
+    public void setPhoneType5(String phoneType5) {
+        this.phoneType5 = phoneType5;
     }
 }

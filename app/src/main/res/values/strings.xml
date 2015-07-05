@@ -5,6 +5,28 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_home_view_activity_1">HomeViewActivity_1</string>
 
+    <string-array name="phoneNoTypes">
+        <item>Mobile</item>
+        <item>Work</item>
+        <item>Home</item>
+        <item>Main</item>
+        <item>Work Fax</item>
+        <item>Home Fax</item>
+    </string-array>
+    <string-array name="emailTypes">
+        <item>Work</item>
+        <item>Home</item>
+        <item>Main</item>
+        <item>Work Fax</item>
+        <item>Home Fax</item>
+    </string-array>
+    <string-array name="dateTypes">
+        <item>BIRTHDAY</item>
+        <item>ANNIVERSARY</item>
+        <item>OTHER</item>
+
+    </string-array>
+
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
 
@@ -33,5 +55,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 =======
     <string name="title_activity_view_details">Details</string>
+    <string name="title_activity_add_new_contact">AddNewContactActivity</string>
 >>>>>>> a049033d6e48c240e9cc744a9b0f432583121a7e
 </resources>
