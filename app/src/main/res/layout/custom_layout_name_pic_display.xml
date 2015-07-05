@@ -5,10 +5,9 @@
 
     <ImageView
         android:id="@+id/imageViewContactImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginRight="20dp"
-        android:layout_marginLeft="10dp"
         android:src="@drawable/contact_temp" />
 
     <TextView
