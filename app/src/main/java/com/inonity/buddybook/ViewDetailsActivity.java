@@ -49,7 +49,7 @@ public class ViewDetailsActivity extends ActionBarActivity {
             e.getMessage();
         }*/
 
-        if (image != null) {
+        if (Image != null) {
             image.setImageURI(Uri.parse(Image));
         }
 
