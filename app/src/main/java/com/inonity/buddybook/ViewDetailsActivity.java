@@ -1,24 +1,24 @@
 package com.inonity.buddybook;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+
+import android.content.Intent;
 import android.net.Uri;
-import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Base64;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
-
-import CustomAdapter.PhoneDetailsAdapter;
 
 public class ViewDetailsActivity extends ActionBarActivity {
 
@@ -28,7 +28,6 @@ public class ViewDetailsActivity extends ActionBarActivity {
     private ListView phoneNoList;
     private TextView name;
     private ImageView image;
-    private Bitmap bitmap = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,30 +54,72 @@ public class ViewDetailsActivity extends ActionBarActivity {
 
         PhoneNumber = getIntent().getExtras().getStringArrayList("Phone Numbers");
 
-        LinearLayout layout = (LinearLayout) findViewById(R.id.phoneNoList);
+        LinearLayout phoneNoLayout = (LinearLayout) findViewById(R.id.phoneNoLayout);
+        LinearLayout callLayout = (LinearLayout) findViewById(R.id.callButtonLayout);
+        LinearLayout smsLayout = (LinearLayout) findViewById(R.id.smsButtonLayout);
         int i = 0;
         try {
             for (String p : PhoneNumber) {
                 Log.i("Name and phone", p);
-                TextView valueTV = new TextView(this);
-                valueTV.setText(p);
-                //valueTV[i].setId(5);
-                valueTV.setLayoutParams(new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.FILL_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT));
 
-                layout.addView(valueTV);
+                //Creating textView
+                final TextView phoneNo = new TextView(this);
+                phoneNo.setId(i);
+                phoneNo.setText(p);
+                phoneNo.setLayoutParams(new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT, 2));
+                phoneNo.setTextSize(20);
+                phoneNo.setPadding(0, 10, 0, 0);
+                phoneNoLayout.addView(phoneNo);
+
+                //Creating imageButton for call
+                ImageButton callButton = new ImageButton(this);
+                callButton.setLayoutParams(new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+                callButton.setImageResource(R.drawable.call);
+                callButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(Intent.ACTION_CALL);
+                        intent.setData(Uri.parse("tel:" + phoneNo.getText()));
+                        startActivity(intent);
+                        //Toast.makeText(getApplicationContext(), phoneNo.getText(), Toast.LENGTH_LONG).show();
+                    }
+                });
+                callLayout.addView(callButton);
+
+                //Creating imageButton for sms
+                ImageButton smsButton = new ImageButton(this);
+                smsButton.setLayoutParams(new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+                smsButton.setImageResource(R.drawable.sms);
+                smsButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        /*try {
+                            SmsManager smsManager = SmsManager.getDefault();
+                            smsManager.sendTextMessage(String.valueOf(phoneNo.getText()), null, null, null, null);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }*/
+                        Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+                        sendIntent.setData(Uri.parse("sms:" + phoneNo.getText()));
+                        sendIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(sendIntent);
+                    }
+                });
+                smsLayout.addView(smsButton);
+
+
                 i++;
             }
         } catch (Exception e) {
             int a = PhoneNumber.lastIndexOf(PhoneNumber);
             Log.i("Name and phone", String.valueOf(a));
         }
-
-
-        //PhoneDetailsAdapter phoneAdapter = new PhoneDetailsAdapter(this, PhoneNumber);
-        //ArrayAdapter<String> phoneAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, PhoneNumber);
-        //phoneNoList.setAdapter(phoneAdapter);
     }
 
     @Override

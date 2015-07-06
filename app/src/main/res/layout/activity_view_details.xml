@@ -48,15 +48,58 @@
                 android:textSize="25sp" />
 
             <LinearLayout
-                android:id="@+id/phoneNoList"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:orientation="vertical">
 
-                <ListView
-                    android:id="@+id/phoneNoList1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/phoneNoLayout"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="3">
+
+                        <!--
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:paddingBottom="5dp"
+                                                    android:paddingTop="5dp"
+                                                    android:text="jhgjgjg"
+                                                    android:textSize="20sp" />-->
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/callButtonLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+<!--
+                        <ImageButton
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/call" />-->
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/smsButtonLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+<!--
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/sms" />-->
+                    </LinearLayout>
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
