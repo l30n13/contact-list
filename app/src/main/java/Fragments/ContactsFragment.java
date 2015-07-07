@@ -127,11 +127,11 @@ public class ContactsFragment extends Fragment implements AdapterView.OnItemClic
     private void showDataFromDatabase() {
 
         listView.setOnItemClickListener(this);
-        list = (ArrayList<ContactHelper>) db.getAllData();
+        list = db.getAllData();
         print(list);
 
 
-        if (null != list && list.size() != 0) {
+        if ( list != null && list.size() != 0) {
             Collections.sort(list, new Comparator<ContactHelper>() {
 
                 @Override
@@ -164,14 +164,30 @@ public class ContactsFragment extends Fragment implements AdapterView.OnItemClic
 
     @Override
     public void onItemClick(AdapterView<?> listview, View v, int position, long id) {
+        ContactHelper contact = list.get(position);
+
         Intent i = new Intent(getActivity(), ViewDetailsActivity.class);
 
-        Log.i("TEST", list.get(position).getName());
+        i.putExtra("Name", contact.getName());
+        i.putExtra("Image", contact.getImage());
+        i.putExtra("Phone Numbers", contact.getPhone());
+        String address = contact.getCity() + " " +
+                contact.getState() + " " +
+                contact.getStreet() + " " +
+                contact.getPoBox() + " " +
+                contact.getZipCode();
+        i.putExtra("Address", address);
 
+        /*String address = (contact.getCity() != null) ? contact.getCity() : null + " ";
+        address += (contact.getState() != null) ? contact.getState() : null + " ";
+        address += (contact.getStreet() != null) ? contact.getStreet() : null + " ";
+        address += (contact.getPoBox() != null) ? contact.getPoBox() : null + " ";
+        address += (contact.getZipCode() != null) ? contact.getZipCode() : null;
+        i.putExtra("Address", address);*/
 
-        i.putExtra("Name", list.get(position).getName());
-        i.putExtra("Image", list.get(position).getImage());
-        i.putExtra("Phone Numbers", list.get(position).getPhone());
+        i.putExtra("Note", contact.getNote());
+
+        i.putExtra("Email", contact.getEmails());
         startActivity(i);
 
         //showCallDialog(list.get(position).getName(), list.get(position).getPhone());
