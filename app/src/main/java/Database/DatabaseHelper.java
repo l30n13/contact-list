@@ -132,28 +132,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put("phone" + i, phone);
             i++;
         }
-       try {
-           int j = 1;
-           for (String email : info.getEmails()) {
-               values.put("email" + j, email);
-               j++;
-           }
-           int k = 1;
-           for (String phoneTypes : info.getPhoneTypes()) {
-               values.put("phone_type" + k, phoneTypes);
-               k++;
-           }
-           int l = 1;
-           for (String emailTypes : info.getEmailTypes()) {
-               values.put("email_type" + l, emailTypes);
-               l++;
-           }
-       }
-       catch (Exception e){
+        try {
+            int j = 1;
+            for (String email : info.getEmails()) {
+                values.put("email" + j, email);
+                j++;
+            }
+            int k = 1;
+            for (String phoneTypes : info.getPhoneTypes()) {
+                values.put("phone_type" + k, phoneTypes);
+                k++;
+            }
+            int l = 1;
+            for (String emailTypes : info.getEmailTypes()) {
+                values.put("email_type" + l, emailTypes);
+                l++;
+            }
+        } catch (Exception e) {
 
-       }
+        }
         values.put(IMAGE, info.getImage());
-        values.put(ADDRESS, info.getAddress());
+        //values.put(ADDRESS, info.getAddress());
         values.put(STATE, info.getState());
         values.put(STREET, info.getStreet());
         values.put(PO_BOX, info.getPoBox());
@@ -185,14 +184,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 ContactHelper info = new ContactHelper();
                 info.setId(c.getInt(c.getColumnIndex(_ID)));
                 info.setName(c.getString(c.getColumnIndex(NAME)));
-                //info.setEmail1(c.getString(c.getColumnIndex(EMAIL1)));
-              info.setImage(c.getString(c.getColumnIndex(IMAGE)));
+                info.setImage(c.getString(c.getColumnIndex(IMAGE)));
+                info.setCity(c.getString(c.getColumnIndex(CITY)));
+                info.setState(c.getString(c.getColumnIndex(STATE)));
+                info.setStreet(c.getString(c.getColumnIndex(STREET)));
+                info.setPoBox(c.getString(c.getColumnIndex(PO_BOX)));
+                info.setZipCode(c.getString(c.getColumnIndex(ZIP_CODE)));
+                info.setNote(c.getString(c.getColumnIndex(NOTE)));
 
                 ArrayList<String> phoneNo = new ArrayList<>();
                 for (int i = 1; i <= 10; i++) {
                     phoneNo.add(c.getString(c.getColumnIndex("phone" + i)));
                 }
                 info.setPhone(phoneNo);
+                ArrayList<String> email = new ArrayList<>();
+                for (int i = 1; i <= 5; i++) {
+                    email.add(c.getString(c.getColumnIndex("email" + i)));
+                }
+                info.setEmails(email);
 
                 dataArrayList.add(info);
             } while (c.moveToNext());
