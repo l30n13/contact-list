@@ -1,37 +1,40 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+
     <LinearLayout
-        android:layout_height="match_parent"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingBottom="@dimen/activity_vertical_margin" >
+        android:paddingBottom="@dimen/activity_vertical_margin">
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:weightSum="1">
 
             <EditText
+                android:id="@+id/editTextNameFirst"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:hint="Name"
-                android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
                 android:ems="10"
-                android:id="@+id/editTextNameFirst" />
+                android:hint="Name"
+                android:inputType="textPersonName" />
 
             <ImageView
+                android:id="@+id/imageView"
                 android:layout_width="40dp"
                 android:layout_height="57dp"
-                android:src="@drawable/contact_temp"
                 android:layout_marginLeft="30dp"
-                android:id="@+id/imageView"
-                android:layout_weight="0.18" />
-        </LinearLayout><![CDATA[
+                android:layout_weight="0.18"
+                android:src="@drawable/contact_temp" />
+        </LinearLayout>
+        <![CDATA[
 
         EditText
         android:layout_width="wrap_content"
@@ -50,222 +53,230 @@
         android:id="@+id/editTextTitle" />
 
         ]]>
+
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            >
+            android:orientation="horizontal">
+
             <TextView
+                android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Phone:"
-                android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:textStyle="bold"
-                android:id="@+id/textView" />
+                android:layout_marginTop="5dp"
+                android:text="Phone:"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textStyle="bold" />
 
 
             <Button
+                android:id="@+id/add"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="+"
-                android:id="@+id/add"
-                android:layout_marginLeft="50dp"/>
+                android:layout_marginLeft="50dp"
+                android:text="+" />
         </LinearLayout>
 
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <EditText
+                android:id="@+id/editTextPhone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="phone"
-                android:hint="Phone"
-                android:ems="10"
                 android:layout_marginRight="10dp"
-                android:id="@+id/editTextPhone" />
+                android:ems="10"
+                android:hint="Phone"
+                android:inputType="phone" />
 
             <Spinner
+                android:id="@+id/spinnerPhone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:id="@+id/spinnerPhone" />
+                android:layout_marginTop="5dp" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-        </LinearLayout>
+            android:orientation="vertical"></LinearLayout>
+
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            >
+            android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Email:"
-                android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:textStyle="bold"
-                android:id="@+id/textView2" />
+                android:layout_marginTop="5dp"
+                android:text="Email:"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textStyle="bold" />
+
             <Button
+                android:id="@+id/addEmail"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="+"
-                android:id="@+id/addEmail"
-                android:layout_marginLeft="50dp"/>
+                android:layout_marginLeft="50dp"
+                android:text="+" />
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <EditText
+                android:id="@+id/editTextEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:hint="Email"
-                android:ems="10"
                 android:layout_marginRight="10dp"
-                android:id="@+id/editTextEmail" />
+                android:ems="10"
+                android:hint="Email"
+                android:inputType="textEmailAddress" />
+
             <Spinner
+                android:id="@+id/spinnerEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:id="@+id/spinnerEmail" />
+                android:layout_marginTop="5dp" />
 
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/containerEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-        </LinearLayout>
+            android:orientation="vertical"></LinearLayout>
 
 
         <TextView
+            android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Address:"
-            android:textStyle="bold"
-            android:id="@+id/textView3" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/editTextCity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:hint="Street"
             android:ems="10"
-            android:id="@+id/editTextStreet" />
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:hint="Po Box"
-            android:ems="10"
-            android:id="@+id/editTextPoBox" />
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
             android:hint="City"
-            android:ems="10"
-            android:id="@+id/editTextCity" />
+            android:inputType="textPersonName" />
 
         <EditText
+            android:id="@+id/editTextState"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
+            android:ems="10"
             android:hint="State"
-            android:ems="10"
-            android:id="@+id/editTextState" />
+            android:inputType="textPersonName" />
+
         <EditText
+            android:id="@+id/editTextStreet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:hint="Zip Code"
             android:ems="10"
-            android:id="@+id/editTextZipCode" />
+            android:hint="Street"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/editTextPoBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Po Box"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/editTextZipCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Zip Code"
+            android:inputType="number"/>
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
 
             <EditText
+                android:id="@+id/editTextDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="date"
-                android:hint="date"
                 android:ems="10"
-                android:id="@+id/editTextDate" />
+                android:hint="date"
+                android:inputType="date" />
 
 
             <Spinner
+                android:id="@+id/spinnerDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:id="@+id/spinnerDate" />
+                android:layout_marginTop="5dp" />
         </LinearLayout>
 
 
         <EditText
+            android:id="@+id/editTextNote"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:hint="Note"
             android:ems="10"
-            android:id="@+id/editTextNote" />
+            android:hint="Note"
+            android:inputType="textPersonName" />
+
         <TextView
+            android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Add Reminder:"
-            android:textStyle="bold"
-            android:id="@+id/textView5" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/editTextReminder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:hint="Reminder"
             android:ems="10"
-            android:id="@+id/editTextReminder" />
+            android:hint="Reminder"
+            android:inputType="textPersonName" />
+
         <TextView
+            android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Group:"
-            android:textStyle="bold"
-            android:id="@+id/textView4" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textStyle="bold" />
 
 
         <Spinner
+            android:id="@+id/spinnerGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/spinnerGroup"
-            android:layout_marginTop="5dp"/>
+            android:layout_marginTop="5dp" />
 
         <Button
+            android:id="@+id/buttonSubmit"
             android:layout_width="380dp"
             android:layout_height="wrap_content"
-            android:text="Submit"
 
-            android:id="@+id/buttonSubmit"
-            android:onClick="show"/>
+            android:onClick="show"
+            android:text="Submit" />
 
 
     </LinearLayout>
