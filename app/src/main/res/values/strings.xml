@@ -31,9 +31,9 @@
     <string name="drawer_close">Close</string>
 
 
-    <string name="drawer_menu1">All Contacts</string>
-    <string name="drawer_menu2">Contacts In Activity</string>
-    <string name="drawer_menu3">Item 3</string>
+    <string name="drawer_menu1">Contacts</string>
+    <string name="drawer_menu2">Search</string>
+    <string name="drawer_menu3">Add Contact</string>
     <string name="drawer_menu4">Item 4</string>
     <string name="drawer_menu5">Sync SocialSite Contacts</string>
     <string name="drawer_menu6">Item 6</string>

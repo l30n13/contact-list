@@ -10,6 +10,7 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -27,7 +28,7 @@ import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
 
 import CustomAdapter.TabsPagerAdapter;
 import Fragments.ContactsFragment;
-
+import Fragments.SearchFragment;
 
 
 public class HomeViewActivity_1 extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -137,7 +138,12 @@ public class HomeViewActivity_1 extends AppCompatActivity implements NavigationV
         buttonSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Item 2 Clicked", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "Item 2 Clicked", Toast.LENGTH_LONG).show();
+                FragmentManager fm=getSupportFragmentManager();
+                FragmentTransaction ft=fm.beginTransaction();
+                SearchFragment myFragment=new SearchFragment();
+                ft.add(R.id.myFragment,myFragment);
+                ft.commit();
 
             }
         });
@@ -192,10 +198,21 @@ public class HomeViewActivity_1 extends AppCompatActivity implements NavigationV
                     .commit();
 
         }
+       else if(mSelectedId ==  R.id.navigation_item_2){
+           // mDrawerLayout.closeDrawer(GravityCompat.START);
+            Fragment drawerFragment = new SearchFragment();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+           /* fragmentManager.beginTransaction()
+                    .replace(R.id.container,drawerFragment)
+                    .commit();*/
+            TabsPagerAdapter tabs = new TabsPagerAdapter(fragmentManager);
+            tabs.getItem(2);
 
-        if (mSelectedId == R.id.navigation_item_2) {
+        }
+
+       else if (mSelectedId == R.id.navigation_item_3) {
             mDrawerLayout.closeDrawer(GravityCompat.START);
-            intent = new Intent(this, ContactListActivity.class);
+            intent = new Intent(this, AddNewContactActivity.class);
             startActivity(intent);
         }
 

@@ -4,24 +4,17 @@
 
     <item
         android:id="@+id/navigation_item_1"
-        android:icon="@drawable/ic_number_0"
+        android:icon="@drawable/ic_action_view_as_list"
         android:title="@string/drawer_menu1" />
     <item
         android:id="@+id/navigation_item_2"
-        android:icon="@drawable/ic_number_1"
+        android:icon="@drawable/ic_action_search"
         android:title="@string/drawer_menu2" />
     <item
         android:id="@+id/navigation_item_3"
-        android:icon="@drawable/ic_number_2"
+        android:icon="@drawable/ic_action_add_person"
         android:title="@string/drawer_menu3" />
-    <item
-        android:id="@+id/navigation_item_4"
-        android:icon="@drawable/ic_number_3"
-        android:title="@string/drawer_menu4" />
-    <item
-        android:id="@+id/navigation_item_5"
-        android:icon="@drawable/ic_number_4"
-        android:title="@string/drawer_menu5" />
+
 
 
 

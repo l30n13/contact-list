@@ -5,8 +5,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import Fragments.ContactsFragment;
-import Fragments.GroupsFragment;
 import Fragments.ReminderFragment;
+import Fragments.SearchFragment;
 
 
 public class TabsPagerAdapter extends FragmentStatePagerAdapter {
@@ -14,6 +14,9 @@ public class TabsPagerAdapter extends FragmentStatePagerAdapter {
 	public TabsPagerAdapter(FragmentManager fm) {
 		super(fm);
 	}
+
+
+	//int pos = getIntent().getExtras().getString("Name");
 
 	@Override
 	public Fragment getItem(int position) {
@@ -26,11 +29,11 @@ public class TabsPagerAdapter extends FragmentStatePagerAdapter {
 
 		}
 		else if(position == 1){
-			myFragment = new ReminderFragment();
+			myFragment = new SearchFragment();
 
 		}
 		else if(position == 2){
-			myFragment = new GroupsFragment();
+			myFragment = new ReminderFragment();
 
 		}
 		return myFragment;
@@ -49,10 +52,10 @@ public class TabsPagerAdapter extends FragmentStatePagerAdapter {
 			tab = "Contacts";
 		}
 		else if(position == 1){
-			tab = "Groups";
+			tab = "Search";
 		}
 		else  if(position == 2){
-			tab = "Groups";
+			tab = "Reminders";
 		}
 		return tab;
 	}

@@ -3,20 +3,18 @@ package com.inonity.buddybook;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.telephony.SmsManager;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -28,6 +26,7 @@ public class ViewDetailsActivity extends ActionBarActivity {
     private ListView phoneNoList;
     private TextView name;
     private ImageView image;
+    EditText reminder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +36,11 @@ public class ViewDetailsActivity extends ActionBarActivity {
         name = (TextView) findViewById(R.id.name);
         Name = getIntent().getExtras().getString("Name");
         name.setText(Name);
+
+
+
+
+
 
         image = (ImageView) findViewById(R.id.imageView);
         Image = getIntent().getExtras().getString("Image");
