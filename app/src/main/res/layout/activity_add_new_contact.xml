@@ -211,7 +211,7 @@
                 android:inputType="date"
                 android:hint="date"
                 android:ems="10"
-                android:id="@+id/editText" />
+                android:id="@+id/editTextDate" />
 
 
             <Spinner

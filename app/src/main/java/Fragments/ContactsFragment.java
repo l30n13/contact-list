@@ -131,7 +131,7 @@ public class ContactsFragment extends Fragment implements AdapterView.OnItemClic
         print(list);
 
 
-        if (null != list && list.size() != 0) {
+      /*  if (null != list && list.size() != 0) {
             Collections.sort(list, new Comparator<ContactHelper>() {
 
                 @Override
@@ -153,9 +153,9 @@ public class ContactsFragment extends Fragment implements AdapterView.OnItemClic
             });
             alert.show();*/
 
-        } else {
+       /* } else {
             showToast("No Contact Found!!!");
-        }
+        }*/
     }
 
     private void showToast(String msg) {
