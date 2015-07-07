@@ -241,7 +241,7 @@ public class AddNewContactActivity extends Activity {
         phoneTypes.add(phType1);
         Toast.makeText(getApplicationContext(), phType1, Toast.LENGTH_SHORT).show();
         for (Spinner pt : allPhoneSp) {
-            emails.add(pt.getSelectedItem().toString());
+            phoneTypes.add(pt.getSelectedItem().toString());
 
         }
         emailTypes = new ArrayList<>();
