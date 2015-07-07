@@ -31,17 +31,20 @@ public class AddNewContactActivity extends Activity {
     ArrayList<Spinner> allPhoneSp;
     ArrayList<EditText> emailAllEt;
     ArrayList<Spinner> emailAllSp;
-    String ph1, ph2, ph3, ph4, ph5;
-    String phType1, phType2, phType3, phType4, phType5;
+    ArrayList<String> phones;
+    ArrayList<String> phoneTypes;
+    ArrayList<String> emailTypes;
+    String phType1, emailType1;
     Spinner phoneSp, emailSp;
     Spinner phone_spinner, email_spinner;
     Spinner date_type;
     Spinner group_spinner;
-    EditText name_et, phone_et, email_et, street_et, po_box_et, city_et, state_et, zip_code_et, note_et, reminder_et;
-    String name, phone, email, street, po_box, city, state, zip_code, note, reminder;
+    EditText name_et, phone_et, email_et, street_et, po_box_et, city_et, date_et,state_et, zip_code_et, note_et, reminder_et;
+    String name, phone,date, email, street, po_box, city, state, zip_code, note, reminder;
     ImageView person_iv;
     Button submit_btn;
     ContactHelper contactHelper;
+
 
 
     @Override
@@ -66,6 +69,8 @@ public class AddNewContactActivity extends Activity {
             emailAdd = (Button) findViewById(R.id.addEmail);
             container = (LinearLayout) findViewById(R.id.container);
             containerEmail = (LinearLayout) findViewById(R.id.containerEmail);
+            date_et = (EditText) findViewById(R.id.editTextDate);
+            phones = new ArrayList<String>();
             allEds = new ArrayList<EditText>();
             allPhoneSp = new ArrayList<Spinner>();
             emailAllEt = new ArrayList<EditText>();
@@ -216,28 +221,63 @@ public class AddNewContactActivity extends Activity {
     public void show(View view) {
         name = name_et.getText().toString();
         phone = phone_et.getText().toString();
-        ArrayList<String> strings = new ArrayList<>();
-        strings.add(phone);
+        email = email_et.getText().toString();
+        phType1 = phone_spinner.getSelectedItem().toString();
+        emailType1 = email_spinner.getSelectedItem().toString();
+        ArrayList<String> phones = new ArrayList<>();
+        phones.add(phone);
 
         for (EditText p : allEds) {
-            strings.add(p.getText().toString());
+            phones.add(p.getText().toString());
+        }
+        ArrayList<String> emails = new ArrayList<>();
+        emails.add(email);
+        Toast.makeText(getApplicationContext(), email, Toast.LENGTH_SHORT).show();
+        for (EditText e : emailAllEt) {
+            emails.add(e.getText().toString());
+
+        }
+        phoneTypes = new ArrayList<>();
+        phoneTypes.add(phType1);
+        Toast.makeText(getApplicationContext(), phType1, Toast.LENGTH_SHORT).show();
+        for (Spinner pt : allPhoneSp) {
+            phoneTypes.add(pt.getSelectedItem().toString());
+
+        }
+        emailTypes = new ArrayList<>();
+        emailTypes.add(emailType1);
+        Toast.makeText(getApplicationContext(), emailType1, Toast.LENGTH_SHORT).show();
+        for (Spinner et : emailAllSp) {
+            emailTypes.add(et.getSelectedItem().toString());
+
         }
 
 ///       phType1 = phone_spinner.getSelectedItem().toString();
-        email = email_et.getText().toString();
+       // email = email_et.getText().toString();
         state = state_et.getText().toString();
         street = street_et.getText().toString();
         po_box = po_box_et.getText().toString();
         city = city_et.getText().toString();
         zip_code = zip_code_et.getText().toString();
         note = note_et.getText().toString();
+        date = date_et.getText().toString();
 
         //Toast.makeText(getApplication(),ph2+" "+phType2+"           "+ph3+" "+phType3+"  "+ph4+"  "+phType4, Toast.LENGTH_LONG).show();
         //setAllInformation();
         Toast.makeText(getApplicationContext(), name, Toast.LENGTH_SHORT).show();
         contactHelper.setName(name);
         Toast.makeText(getApplicationContext(), contactHelper.getName(), Toast.LENGTH_SHORT).show();
-        contactHelper.setPhone(strings);
+        contactHelper.setPhone(phones);
+        contactHelper.setPhoneTypes(phoneTypes);
+        contactHelper.setEmails(emails);
+        contactHelper.setEmailTypes(emailTypes);
+        contactHelper.setCity(city);
+        contactHelper.setState(state);
+        contactHelper.setZipCode(zip_code);
+        contactHelper.setStreet(street);
+        contactHelper.setPoBox(po_box);
+        contactHelper.setDate(date);
+        contactHelper.setNote(note);
         DatabaseHelper databaseHelper = new DatabaseHelper(this);
         long insert = databaseHelper.addDetail(contactHelper);
         if (insert >= 1)

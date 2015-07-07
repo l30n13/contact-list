@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import HelperClasses.ContactHelper;
 
@@ -22,7 +21,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String _ID = "_id";
     private static final String NAME = "name";
     private static final String IMAGE = "image";
-    private static final String EMAIL = "email";
+    private static final String EMAIL1 = "email1";
+    private static final String EMAIL2 = "email2";
+    private static final String EMAIL3 = "email3";
+    private static final String EMAIL4 = "email4";
+    private static final String EMAIL5 = "email5";
+    private static final String EMAIL_TYPE1 = "email_type1";
+    private static final String EMAIL_TYPE2 = "email_type2";
+    private static final String EMAIL_TYPE3 = "email_type3";
+    private static final String EMAIL_TYPE4 = "emai1_type4";
+    private static final String EMAIL_TYPE5 = "emai1_type5";
     private static final String PHONE1 = "phone1";
     private static final String PHONE2 = "phone2";
     private static final String PHONE3 = "phone3";
@@ -32,11 +40,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String PHONE7 = "phone7";
     private static final String PHONE8 = "phone8";
     private static final String PHONE9 = "phone9";
+    private static final String PHONE_TYPE1 = "phone_type1";
+    private static final String PHONE_TYPE2 = "phone_type2";
+    private static final String PHONE_TYPE3 = "phone_type3";
+    private static final String PHONE_TYPE4 = "phone_type4";
+    private static final String PHONE_TYPE5 = "phone_type5";
     private static final String PHONE10 = "phone10";
     private static final String ADDRESS = "address";
     private static final String STREET = "street";
     private static final String PO_BOX = "po_box";
     private static final String CITY = "city";
+    private static final String DATE = "date";
     private static final String STATE = "state";
     private static final String ZIP_CODE = "zip_code";
     private static final String EVENTS = "events";
@@ -61,13 +75,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             PHONE8 + " TEXT, " +
             PHONE9 + " TEXT, " +
             PHONE10 + " TEXT, " +
-            EMAIL + " TEXT, " +
+            PHONE_TYPE1 + " TEXT, " +
+            PHONE_TYPE2 + " TEXT, " +
+            PHONE_TYPE3 + " TEXT, " +
+            PHONE_TYPE4 + " TEXT, " +
+            PHONE_TYPE5 + " TEXT, " +
+            EMAIL1 + " TEXT, " +
+            EMAIL2 + " TEXT, " +
+            EMAIL3 + " TEXT, " +
+            EMAIL4 + " TEXT, " +
+            EMAIL5 + " TEXT, " +
+            EMAIL_TYPE1 + " TEXT, " +
+            EMAIL_TYPE2 + " TEXT, " +
+            EMAIL_TYPE3 + " TEXT, " +
+            EMAIL_TYPE4 + " TEXT, " +
+            EMAIL_TYPE5 + " TEXT, " +
             ADDRESS + " TEXT, " +
             STREET + " TEXT, " +
             PO_BOX + " TEXT, " +
             CITY + " TEXT, " +
             STATE + " TEXT, " +
             ZIP_CODE + " TEXT, " +
+            DATE + " TEXT, " +
             EVENTS + " TEXT, " +
             NOTE + " TEXT, " +
             GROUPS + " TEXT" +
@@ -94,6 +123,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public long addDetail(ContactHelper info) {
         SQLiteDatabase db = getWritableDatabase();
 
+
         ContentValues values = new ContentValues();
         values.put(NAME, info.getName());
 
@@ -102,9 +132,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put("phone" + i, phone);
             i++;
         }
+        try {
+            int j = 1;
+            for (String email : info.getEmails()) {
+                values.put("email" + j, email);
+                j++;
+            }
+            int k = 1;
+            for (String phoneTypes : info.getPhoneTypes()) {
+                values.put("phone_type" + k, phoneTypes);
+                k++;
+            }
+            int l = 1;
+            for (String emailTypes : info.getEmailTypes()) {
+                values.put("email_type" + l, emailTypes);
+                l++;
+            }
+        } catch (Exception e) {
+
+        }
         values.put(IMAGE, info.getImage());
-        values.put(EMAIL, info.getEmail());
-        values.put(ADDRESS, info.getAddress());
+        //values.put(ADDRESS, info.getAddress());
         values.put(STATE, info.getState());
         values.put(STREET, info.getStreet());
         values.put(PO_BOX, info.getPoBox());
@@ -113,6 +161,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(EVENTS, info.getEvents());
         values.put(NOTE, info.getNote());
         values.put(GROUPS, info.getGroups());
+        values.put(DATE, info.getDate());
 
         long insert = db.insert(TABLE_NAME, null, values);
         db.close();
@@ -136,12 +185,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 info.setId(c.getInt(c.getColumnIndex(_ID)));
                 info.setName(c.getString(c.getColumnIndex(NAME)));
                 info.setImage(c.getString(c.getColumnIndex(IMAGE)));
+                info.setCity(c.getString(c.getColumnIndex(CITY)));
+                info.setState(c.getString(c.getColumnIndex(STATE)));
+                info.setStreet(c.getString(c.getColumnIndex(STREET)));
+                info.setPoBox(c.getString(c.getColumnIndex(PO_BOX)));
+                info.setZipCode(c.getString(c.getColumnIndex(ZIP_CODE)));
+                info.setNote(c.getString(c.getColumnIndex(NOTE)));
 
                 ArrayList<String> phoneNo = new ArrayList<>();
                 for (int i = 1; i <= 10; i++) {
                     phoneNo.add(c.getString(c.getColumnIndex("phone" + i)));
                 }
                 info.setPhone(phoneNo);
+                ArrayList<String> email = new ArrayList<>();
+                for (int i = 1; i <= 5; i++) {
+                    email.add(c.getString(c.getColumnIndex("email" + i)));
+                }
+                info.setEmails(email);
 
                 dataArrayList.add(info);
             } while (c.moveToNext());
