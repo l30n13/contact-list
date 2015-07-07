@@ -198,23 +198,13 @@ public class HomeViewActivity_1 extends AppCompatActivity implements NavigationV
                     .commit();
 
         }
-       else if(mSelectedId ==  R.id.navigation_item_2){
-           // mDrawerLayout.closeDrawer(GravityCompat.START);
-            Fragment drawerFragment = new SearchFragment();
-            FragmentManager fragmentManager = getSupportFragmentManager();
-           /* fragmentManager.beginTransaction()
-                    .replace(R.id.container,drawerFragment)
-                    .commit();*/
-            TabsPagerAdapter tabs = new TabsPagerAdapter(fragmentManager);
-            tabs.getItem(2);
-
-        }
-
-       else if (mSelectedId == R.id.navigation_item_3) {
+        else if (mSelectedId == R.id.navigation_item_2) {
             mDrawerLayout.closeDrawer(GravityCompat.START);
             intent = new Intent(this, AddNewContactActivity.class);
             startActivity(intent);
         }
+
+
 
 
     }

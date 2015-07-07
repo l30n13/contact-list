@@ -49,13 +49,13 @@ public class TabsPagerAdapter extends FragmentStatePagerAdapter {
 		//return "Tab " + (position + 1);
 		String tab = "";
 		if(position == 0){
-			tab = "Contacts";
+			tab = "   Contacts";
 		}
 		else if(position == 1){
-			tab = "Search";
+			tab = "      Search";
 		}
 		else  if(position == 2){
-			tab = "Reminders";
+			tab = "      Reminders";
 		}
 		return tab;
 	}

@@ -14,4 +14,5 @@
         android:gravity="right"
         style="@style/TextAppearance.AppCompat.Title"
         android:text="Null Bytes" />
+
 </FrameLayout>

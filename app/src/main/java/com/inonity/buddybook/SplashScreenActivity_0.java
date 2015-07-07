@@ -13,7 +13,7 @@ public class SplashScreenActivity_0 extends Activity {
         setContentView(R.layout.activity_splash_screen_activity_0);
         //Splash screen
 
-        int SPLASH_DISPLAY_LENGTH = 2000;
+        int SPLASH_DISPLAY_LENGTH = 1000;
         new android.os.Handler().postDelayed(new Runnable() {
 
             @Override

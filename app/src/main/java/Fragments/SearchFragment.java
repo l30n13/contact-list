@@ -14,7 +14,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.inonity.buddybook.R;
 import com.inonity.buddybook.ViewDetailsActivity;
@@ -70,13 +69,19 @@ public class SearchFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Intent i = new Intent(getActivity(), ViewDetailsActivity.class);
-                Toast.makeText(getActivity(), "clicked item " + position, Toast.LENGTH_LONG).show();
+                //Toast.makeText(getActivity(), "clicked item " + position, Toast.LENGTH_LONG).show();
                 Log.i("TEST", list.get(position).getName());
 
 
                 i.putExtra("Name", list.get(position).getName());
                 i.putExtra("Image", list.get(position).getImage());
                 i.putExtra("Phone Numbers", list.get(position).getPhone());
+                String address = list.get(position).getCity() + " " +
+                        list.get(position).getState() + " " +
+                        list.get(position).getStreet() + " " +
+                        list.get(position).getPoBox() + " " +
+                        list.get(position).getZipCode();
+                i.putExtra("Address", address);
                 startActivity(i);
             }
         });

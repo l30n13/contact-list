@@ -63,7 +63,6 @@ public class ViewDetailsActivity extends ActionBarActivity {
         } else {
             address.setText(null);
         }
-
         note = (TextView) findViewById(R.id.note);
         note.setText(getIntent().getExtras().getString("Note"));
 
@@ -86,6 +85,7 @@ public class ViewDetailsActivity extends ActionBarActivity {
                             LinearLayout.LayoutParams.WRAP_CONTENT,
                             LinearLayout.LayoutParams.WRAP_CONTENT, 2));
                     phoneNo.setTextSize(20);
+                    phoneNo.setHeight(100);
                     phoneNo.setPadding(0, 10, 0, 0);
                     phoneNoLayout.addView(phoneNo);
 
@@ -93,8 +93,8 @@ public class ViewDetailsActivity extends ActionBarActivity {
                     ImageButton callButton = new ImageButton(this);
                     callButton.setLayoutParams(new LinearLayout.LayoutParams(
                             LinearLayout.LayoutParams.WRAP_CONTENT,
-                            LinearLayout.LayoutParams.WRAP_CONTENT, 1));
-                    callButton.setImageResource(R.drawable.call);
+                            LinearLayout.LayoutParams.WRAP_CONTENT, 10));
+                    callButton.setImageResource(R.drawable.ic_call);
                     callButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -111,7 +111,7 @@ public class ViewDetailsActivity extends ActionBarActivity {
                     smsButton.setLayoutParams(new LinearLayout.LayoutParams(
                             LinearLayout.LayoutParams.WRAP_CONTENT,
                             LinearLayout.LayoutParams.WRAP_CONTENT, 1));
-                    smsButton.setImageResource(R.drawable.sms);
+                    smsButton.setImageResource(R.drawable.ic_sms);
                     smsButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

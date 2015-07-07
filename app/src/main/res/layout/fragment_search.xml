@@ -8,7 +8,8 @@
     <!-- Editext for Search -->
     <EditText android:id="@+id/inputSearch"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
+        android:textSize="30sp"
         android:hint="  Search"
         android:drawableLeft="@drawable/abc_ic_search_api_mtrl_alpha"
         android:inputType="textPersonName"/>
