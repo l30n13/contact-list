@@ -74,7 +74,8 @@ public class ViewDetailsActivity extends ActionBarActivity {
                         LinearLayout.LayoutParams.WRAP_CONTENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT, 2));
                 phoneNo.setTextSize(20);
-                phoneNo.setPadding(0, 10, 0, 0);
+                phoneNo.setHeight(100);
+                phoneNo.setPadding(0, 0, 0, 0);
                 phoneNoLayout.addView(phoneNo);
 
                 //Creating imageButton for call
@@ -82,7 +83,8 @@ public class ViewDetailsActivity extends ActionBarActivity {
                 callButton.setLayoutParams(new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.WRAP_CONTENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT, 1));
-                callButton.setImageResource(R.drawable.call);
+                callButton.setImageResource(R.drawable.ic_call);
+
                 callButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
