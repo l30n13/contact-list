@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import Fragments.ContactsFragment;
-import Fragments.ReminderFragment;
+import Fragments.NotesFragment;
 import Fragments.SearchFragment;
 
 
@@ -33,7 +33,7 @@ public class TabsPagerAdapter extends FragmentStatePagerAdapter {
 
 		}
 		else if(position == 2){
-			myFragment = new ReminderFragment();
+			myFragment = new NotesFragment();
 
 		}
 		return myFragment;
@@ -55,7 +55,7 @@ public class TabsPagerAdapter extends FragmentStatePagerAdapter {
 			tab = "      Search";
 		}
 		else  if(position == 2){
-			tab = "      Reminders";
+			tab = "      Notes";
 		}
 		return tab;
 	}

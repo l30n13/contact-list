@@ -36,9 +36,9 @@ public class HomeViewActivity_1 extends AppCompatActivity implements NavigationV
     private static final String SELECTED_ITEM_ID = "selected_item_id";
     private static final String FIRST_TIME = "first_time";
     private Toolbar mToolbar;
-    private TabLayout swipeTabLayout;
     private NavigationView mDrawer;
     private DrawerLayout mDrawerLayout;
+    private TabLayout swipeTabLayout;
     private ViewPager mPager;
     private TabsPagerAdapter tabsAdapter;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -95,8 +95,6 @@ public class HomeViewActivity_1 extends AppCompatActivity implements NavigationV
         * */
         ImageView imageView = new ImageView(this);
         imageView.setImageResource(R.drawable.ic_add_black);
-
-
 
 
         com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton actionButton = new com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton.Builder(this)
