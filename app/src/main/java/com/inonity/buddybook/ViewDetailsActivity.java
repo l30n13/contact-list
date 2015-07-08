@@ -15,11 +15,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
 import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
 
 import java.util.ArrayList;
+
+import Database.DatabaseHelper;
 
 public class ViewDetailsActivity extends ActionBarActivity {
 
@@ -29,20 +32,23 @@ public class ViewDetailsActivity extends ActionBarActivity {
     private ListView phoneNoList;
     private TextView name, address, note;
     private ImageView image;
+    DatabaseHelper db;
     EditText reminder;
+
+    String pId;
+    int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_details);
+        db = new DatabaseHelper(this);
 //        phoneNoList = (ListView) findViewById(R.id.phoneNoList);
         name = (TextView) findViewById(R.id.name);
         Name = getIntent().getExtras().getString("Name");
         name.setText(Name);
 
-
-
-
+        id = getIntent().getExtras().getInt("id");
 
 
         image = (ImageView) findViewById(R.id.imageView);
@@ -224,6 +230,16 @@ public class ViewDetailsActivity extends ActionBarActivity {
             @Override
             public void onClick(View view) {
 
+                if(db.delete(id)) {
+                    Toast.makeText(getApplication(), "Deleted", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(ViewDetailsActivity.this,HomeViewActivity_1.class);
+                    startActivity(i);
+                }
+                else {
+                    Toast.makeText(getApplication(), "not Delete", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(ViewDetailsActivity.this,HomeViewActivity_1.class);
+                    startActivity(i);
+                }
 
             }
         });

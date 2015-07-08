@@ -148,7 +148,7 @@ public class HomeViewActivity_1 extends AppCompatActivity implements NavigationV
         buttonAddNewGroup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Item 3 Clicked", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Settings", Toast.LENGTH_LONG).show();
 
             }
         });

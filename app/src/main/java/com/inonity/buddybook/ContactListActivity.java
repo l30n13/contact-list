@@ -10,17 +10,12 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.provider.MediaStore;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -151,6 +146,7 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
 
         Log.i("TEST", list.get(position).getName());
 
+       // i.putExtra("ColumnValue",list.get(position).getId());
 
         i.putExtra("Name", list.get(position).getName());
         i.putExtra("Image", list.get(position).getImage());

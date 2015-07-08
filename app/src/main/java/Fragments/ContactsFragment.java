@@ -168,6 +168,8 @@ public class ContactsFragment extends Fragment implements AdapterView.OnItemClic
 
         Intent i = new Intent(getActivity(), ViewDetailsActivity.class);
 
+        i.putExtra("id",contact.getId());
+
         i.putExtra("Name", contact.getName());
         i.putExtra("Image", contact.getImage());
         i.putExtra("Phone Numbers", contact.getPhone());

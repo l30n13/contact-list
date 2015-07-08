@@ -230,4 +230,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    public boolean delete(int id){
+        String deleteQuery = "DELETE  FROM " + TABLE_NAME+" WHERE _id = "+id;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(deleteQuery, null);
+        if(c.getCount()>=1){
+            db.close();
+            return false;
+        }
+        else{
+            db.close();
+            return true;
+        }
+    }
+
 }
