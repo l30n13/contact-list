@@ -31,9 +31,9 @@ public class SearchFragment extends Fragment {
 
 
     private DatabaseHelper db;
-    private ListView listView;
+    private ListView listViewSearch;
     private ArrayList<ContactHelper> list = new ArrayList<>();
-    private ArrayList<String> nameList = new ArrayList<String>();
+    private ArrayList<String> SearchNameList = new ArrayList<String>();
     private ArrayAdapter <String> adapter;
     private ContactHelper objContact;
 
@@ -51,21 +51,29 @@ public class SearchFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.fragment_search, container, false);
-        listView = (ListView)rootview.findViewById(R.id.list_view);
-        //listView.setOnItemSelectedListener(this);
+        listViewSearch = (ListView)rootview.findViewById(R.id.list_view);
+        //listViewSearch.setOnItemSelectedListener(this);
         inputSearch = (EditText)rootview.findViewById(R.id.inputSearch);
 
-        //listView.setOnItemClickListener(getActivity());
-        db = new DatabaseHelper(getActivity());
-        list =  db.getAllData();
-
-        for(int i = 0 ;i <list.size();i++){
-            nameList.add(list.get(i).getName());
+        //listViewSearch.setOnItemClickListener(getActivity());
+        try {
+            db = new DatabaseHelper(getActivity());
+            list =  db.getAllData();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        adapter = new ArrayAdapter<String>(getActivity(),R.layout.custom_layout_name_pic_display,R.id.textViewContactName, nameList);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        /*for(int i = 0 ;i <list.size();i++){
+            SearchNameList.add(list.get(i).getName());
+        }*/
+
+        for(ContactHelper contact : list){
+            SearchNameList.add(contact.getName());
+        }
+
+        adapter = new ArrayAdapter<String>(getActivity(),R.layout.custom_layout_name_pic_display,R.id.textViewContactName, SearchNameList);
+        listViewSearch.setAdapter(adapter);
+        listViewSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Intent i = new Intent(getActivity(), ViewDetailsActivity.class);
@@ -89,7 +97,7 @@ public class SearchFragment extends Fragment {
 
 
         /*ContactAdapter objAdapter = new ContactAdapter(this, list);
-        listView.setAdapter(objAdapter);*/
+        listViewSearch.setAdapter(objAdapter);*/
 
         inputSearch.addTextChangedListener(new TextWatcher() {
             @Override

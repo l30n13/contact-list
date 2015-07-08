@@ -194,54 +194,43 @@ public class ViewDetailsActivity extends ActionBarActivity {
 
         //floating action button
         ImageView imageView = new ImageView(this);
-        imageView.setImageResource(R.drawable.ic_add_black);
-
-
+        imageView.setImageResource(R.drawable.ic_settings);
         com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton actionButton = new com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton.Builder(this)
                 .setContentView(imageView)
                 .build();
 
         ImageView iconItem1 = new ImageView(this);
 
-        iconItem1.setImageResource(R.drawable.ic_action_add_person);
+        iconItem1.setImageResource(R.drawable.ic_delete);
         ImageView iconItem2 = new ImageView(this);
-        iconItem2.setImageResource(R.drawable.ic_action_search);
-        /*ImageView iconItem3 = new ImageView(this);
-        iconItem3.setImageResource(R.drawable.ic_action_add_group);*/
+        iconItem2.setImageResource(R.drawable.ic_edit);
+
 
         SubActionButton.Builder itemBuilder = new SubActionButton.Builder(this);
 
         SubActionButton buttonDelete = itemBuilder.setContentView(iconItem1).build();
         SubActionButton buttonEdit = itemBuilder.setContentView(iconItem2).build();
-       // SubActionButton buttonAddNewGroup = itemBuilder.setContentView(iconItem3).build();
+
 
 
         FloatingActionMenu actionMenu = new FloatingActionMenu.Builder(this)
 
                 .addSubActionView(buttonDelete)
                 .addSubActionView(buttonEdit)
-                //.addSubActionView(buttonAddNewGroup)
                 .attachTo(actionButton)
                 .build();
 
         buttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //  Toast.makeText(getApplicationContext(), "Item 1 Clicked", Toast.LENGTH_LONG).show();
-               /* Intent intent = new Intent(ViewDetailsActivity.this, AddNewContactActivity.class);
-                startActivity(intent);*/
+
 
             }
         });
         buttonEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Toast.makeText(getApplicationContext(), "Item 2 Clicked", Toast.LENGTH_LONG).show();
-                /*FragmentManager fm = getSupportFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
-                SearchFragment myFragment = new SearchFragment();
-                ft.add(R.id.myFragment, myFragment);
-                ft.commit();*/
+
 
             }
         });

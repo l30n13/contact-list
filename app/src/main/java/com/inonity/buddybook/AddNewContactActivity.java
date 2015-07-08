@@ -2,6 +2,7 @@ package com.inonity.buddybook;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.LayoutInflater;
@@ -232,21 +233,21 @@ public class AddNewContactActivity extends Activity {
         }
         ArrayList<String> emails = new ArrayList<>();
         emails.add(email);
-        Toast.makeText(getApplicationContext(), email, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), email, Toast.LENGTH_SHORT).show();
         for (EditText e : emailAllEt) {
             emails.add(e.getText().toString());
 
         }
         phoneTypes = new ArrayList<>();
         phoneTypes.add(phType1);
-        Toast.makeText(getApplicationContext(), phType1, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), phType1, Toast.LENGTH_SHORT).show();
         for (Spinner pt : allPhoneSp) {
             phoneTypes.add(pt.getSelectedItem().toString());
 
         }
         emailTypes = new ArrayList<>();
         emailTypes.add(emailType1);
-        Toast.makeText(getApplicationContext(), emailType1, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), emailType1, Toast.LENGTH_SHORT).show();
         for (Spinner et : emailAllSp) {
             emailTypes.add(et.getSelectedItem().toString());
 
@@ -264,9 +265,9 @@ public class AddNewContactActivity extends Activity {
 
         //Toast.makeText(getApplication(),ph2+" "+phType2+"           "+ph3+" "+phType3+"  "+ph4+"  "+phType4, Toast.LENGTH_LONG).show();
         //setAllInformation();
-        Toast.makeText(getApplicationContext(), name, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), name, Toast.LENGTH_SHORT).show();
         contactHelper.setName(name);
-        Toast.makeText(getApplicationContext(), contactHelper.getName(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), contactHelper.getName(), Toast.LENGTH_SHORT).show();
         contactHelper.setPhone(phones);
         contactHelper.setPhoneTypes(phoneTypes);
         contactHelper.setEmails(emails);
@@ -281,6 +282,9 @@ public class AddNewContactActivity extends Activity {
         DatabaseHelper databaseHelper = new DatabaseHelper(this);
         long insert = databaseHelper.addDetail(contactHelper);
         if (insert >= 1)
-            Toast.makeText(getApplicationContext(), "inserted", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(AddNewContactActivity.this,HomeViewActivity_1.class);
+        startActivity(intent);
     }
 }

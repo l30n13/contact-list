@@ -107,7 +107,7 @@ public class HomeViewActivity_1 extends AppCompatActivity implements NavigationV
         ImageView iconItem2 = new ImageView(this);
         iconItem2.setImageResource(R.drawable.ic_action_search);
         ImageView iconItem3 = new ImageView(this);
-        iconItem3.setImageResource(R.drawable.ic_action_add_group);
+        iconItem3.setImageResource(R.drawable.icon_settings);
 
         SubActionButton.Builder itemBuilder = new SubActionButton.Builder(this);
 
